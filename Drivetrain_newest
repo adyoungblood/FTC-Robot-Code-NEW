@@ -1,0 +1,70 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
+/*
+ * Basic program for Victanus's new drive train.
+ * Basics:
+ *  Forward - gamepad 2a, 1a = 1 (pressed) Motors left, right = 1
+ *Turn right  - gamepad 2a, 1b = 1 (pressed) Motor right = -1, motor left = 1
+ * Turn left  -  gamepad 2b, 1a = 1 (pressed) Motor right = 1, motor left = -1
+ * Backward - gampad 2b, 1b = 1 (pressed) Motor right = -1, motor left = -1
+*  else - Motors left, right = 0
+*   p.s. I clobbered this other guys code to make this. Enjoi 
+ */
+@TeleOp(name = "DriveTraincontrol", group = "Tutorials")
+class DriveTraincontrol extends LinearOpMode
+{
+    // Declare drive motors
+    private DcMotor motorLeft;
+    private DcMotor motorRight;
+    @Override
+    public void runOpMode() throws InterruptedException
+    {
+        // Initialize drive motors
+        motorLeft = hardwareMap.dcMotor.get("motorLeft");
+        motorRight = hardwareMap.dcMotor.get("motorRight");
+
+        // If drive motors are given full power, robot would spin because of the motors being in
+        // opposite directions. So reverse one
+        motorLeft.setDirection(DcMotor.Direction.REVERSE);
+
+
+        // Wait until start button is pressed
+        waitForStart();
+
+        // Repeatedly run code in here until stop button is pressed
+        while(opModeIsActive())
+        {
+            // Move drivetrain if requested
+            if (gamepad1.a && gamepad2.a)
+            {
+                motorLeft.setPower(1);
+                motorRight.setPower(1);
+            }
+            if(gamepad1.b && gamepad2.b)
+            {
+                motorLeft.setPower(-1);
+                motorRight.setPower(-1);
+            }
+            if(gamepad1.a && gamepad2.b)
+            {
+                motorLeft.setPower(1);
+                motorRight.setPower(-1);
+            }
+            if(gamepad1.b && gamepad2.a)
+            {
+                motorLeft.setPower(-1);
+                motorRight.setPower(1);
+            }
+            else
+                motorLeft.setPower(0);
+                motorRight.setPower(0);
+            // Give hardware a chance to catch up
+            idle();
+        }
+    }
+}
