@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-/*
+/* (V 2.0 of drivetrain program; incl alexanders suggestions (thx alexander); so partially pressing down a button will
+ * also make the servos go partially.
  * Basic program for Victanus's new drive train.
  * Basics:
  *  Forward - gamepad 2a, 1a = 1 (pressed) Motors left, right = 1
@@ -13,7 +14,6 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Turn left  -  gamepad 2b, 1a = 1 (pressed) Motor right = 1, motor left = -1
  * Backward - gampad 2b, 1b = 1 (pressed) Motor right = -1, motor left = -1
 *  else - Motors left, right = 0
-*   p.s. I clobbered this other guys code to make this. Enjoi 
  */
 @TeleOp(name = "DriveTraincontrol", group = "Tutorials")
 class DriveTraincontrol extends LinearOpMode
@@ -42,23 +42,26 @@ class DriveTraincontrol extends LinearOpMode
             // Move drivetrain if requested
             if (gamepad1.a && gamepad2.a)
             {
-                motorLeft.setPower(1);
-                motorRight.setPower(1);
+                motorLeft.setPower(gamepad1.a);
+                // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
+                motorRight.setPower(gamepad1.a);
             }
             if(gamepad1.b && gamepad2.b)
             {
-                motorLeft.setPower(-1);
-                motorRight.setPower(-1);
+                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
+                motorLeft.setPower(-gamepad2.b);
+                motorRight.setPower(-gamepad2.b);
             }
             if(gamepad1.a && gamepad2.b)
             {
-                motorLeft.setPower(1);
-                motorRight.setPower(-1);
+                // change done to previous ones not done to this, due to the fact that steering needs max. manueverability
+                motorLeft.setPower(gamepad1.a);
+                motorRight.setPower(-gamepad2.b);
             }
             if(gamepad1.b && gamepad2.a)
             {
-                motorLeft.setPower(-1);
-                motorRight.setPower(1);
+                motorLeft.setPower(-gamepad1.b);
+                motorRight.setPower(gamepad2.a);
             }
             else
                 motorLeft.setPower(0);
