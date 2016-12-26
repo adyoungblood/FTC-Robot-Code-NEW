@@ -44,24 +44,24 @@ class Drive02 extends LinearOpMode
             {
                 motorLeft.setPower(1);
                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
-                motorRight.setPower(gamepad1.a);
+                motorRight.setPower(1);
             }
             if(gamepad1.b && gamepad2.b)
             {
                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
-                motorLeft.setPower(-gamepad2.b);
-                motorRight.setPower(-gamepad2.b);
+                motorLeft.setPower(-0.5);
+                motorRight.setPower(-1);
             }
             if(gamepad1.a && gamepad2.b)
             {
                 // change done to previous ones not done to this, due to the fact that steering needs max. manueverability
-                motorLeft.setPower(gamepad1.a);
-                motorRight.setPower(-gamepad2.b);
+                motorLeft.setPower(1);
+                motorRight.setPower(-1);
             }
             if(gamepad1.b && gamepad2.a)
             {
-                motorLeft.setPower(-gamepad1.b);
-                motorRight.setPower(gamepad2.a);
+                motorLeft.setPower(-1);
+                motorRight.setPower(1);
             }
             else
                 motorLeft.setPower(0);
