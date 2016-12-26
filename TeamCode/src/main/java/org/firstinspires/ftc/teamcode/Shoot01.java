@@ -124,7 +124,7 @@ public class Shoot01 extends OpMode
 
         drive_control();
         //shooter_control();
-        intake_control();
+        //intake_control();
 
         telemetry.addData("Status", "Running: " + runtime.toString());
 
@@ -198,9 +198,9 @@ public class Shoot01 extends OpMode
         }
         */
         // Joystick control
-        joystick1_left_x = gamepad1.left_stick_x;
-        joystick1_right_x = -gamepad1.right_stick_x;
-        joystick1_left_y = -gamepad1.left_stick_y;
+        //joystick1_left_x = gamepad1.left_stick_x;
+        //joystick1_right_x = -gamepad1.right_stick_x;
+        joystick1_left_y = gamepad1.left_stick_y;
         joystick1_right_y = gamepad1.right_stick_y;
 
         motor_drive_left.setPower(joystick1_left_y);
