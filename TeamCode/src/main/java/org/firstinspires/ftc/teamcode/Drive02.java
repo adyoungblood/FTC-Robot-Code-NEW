@@ -42,7 +42,7 @@ class Drive02 extends LinearOpMode
             // Move drivetrain if requested
             if (gamepad1.a && gamepad2.a)
             {
-                motorLeft.setPower(gamepad1.a);
+                motorLeft.setPower(1);
                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
                 motorRight.setPower(gamepad1.a);
             }
