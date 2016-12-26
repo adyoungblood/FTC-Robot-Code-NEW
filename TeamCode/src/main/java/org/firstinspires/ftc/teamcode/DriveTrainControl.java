@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Basic program for Victanus's new drive train.
  * Basics:
  *  Forward - gamepad 2a, 1a = 1 (pressed) Motors left, right = 1
- *Turn right  - gamepad 2a, 1b = 1 (pressed) Motor right = -1, motor left = 1
+ * Turn right  - gamepad 2a, 1b = 1 (pressed) Motor right = -1, motor left = 1
  * Turn left  -  gamepad 2b, 1a = 1 (pressed) Motor right = 1, motor left = -1
  * Backward - gampad 2b, 1b = 1 (pressed) Motor right = -1, motor left = -1
 *  else - Motors left, right = 0
@@ -48,7 +48,7 @@ class DriveTrainControl extends LinearOpMode
             }
             if(gamepad1.b && gamepad2.b)
             {
-                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
+                // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
                 motorLeft.setPower(-gamepad2.b);
                 motorRight.setPower(-gamepad2.b);
             }
@@ -65,7 +65,7 @@ class DriveTrainControl extends LinearOpMode
             }
             else
                 motorLeft.setPower(0);
-                motorRight.setPower(0);
+            motorRight.setPower(0);
             // Give hardware a chance to catch up
             idle();
         }
