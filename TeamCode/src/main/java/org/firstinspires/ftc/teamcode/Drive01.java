@@ -15,9 +15,9 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 
-@TeleOp(name="Shoot01", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
+@TeleOp(name="Drive01", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
 
-public class Shoot01 extends OpMode
+public class Drive01 extends OpMode
 {
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();

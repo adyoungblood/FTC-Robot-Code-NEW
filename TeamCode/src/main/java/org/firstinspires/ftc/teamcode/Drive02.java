@@ -15,8 +15,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Backward - gampad 2b, 1b = 1 (pressed) Motor right = -1, motor left = -1
 *  else - Motors left, right = 0
  */
-@TeleOp(name = "DriveTrainControl", group = "Tutorials")
-class DriveTrainControl extends LinearOpMode
+@TeleOp(name = "Drive02", group = "Tutorials")
+class Drive02 extends LinearOpMode
 {
     // Declare drive motors
     private DcMotor motorLeft;
