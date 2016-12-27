@@ -23,8 +23,8 @@ import com.qualcomm.robotcore.hardware.Servo;
  *  Gamepad.b - shoot ball -
  *  <code that is commented out and indented will be added later>
  */
-@TeleOp(name = "Drive02", group = "Tutorials")
-class Drive02 extends LinearOpMode
+@TeleOp(name = "Drive02_sylvana", group = "Tutorials")
+class Drive02_sylvana extends LinearOpMode
 {
     // Initialization of joystick buttons:
     public double button_RT;
