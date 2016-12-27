@@ -80,6 +80,7 @@ class Drive02_sylvana extends OpMode {
     @Override
     public void init() {
         // Initialize drive motors
+        motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
@@ -96,34 +97,22 @@ class Drive02_sylvana extends OpMode {
     @Override
     public void loop() {
 
-        if (0 < button_RT && 0 < button_LT)
-        {
-            motor_drive_left.setPower(button_LT);
-            // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
-            motor_drive_right.setPower(button_LT);
+        button_RT = gamepad1.right_trigger;
+        button_LT = gamepad1.left_trigger;
+
+        if (button_LT > 0) {
+            if (button_LB) {
+                motor_drive_left.setPower(-button_LT);
+            } else {
+                motor_drive_left.setPower(button_LT);
+            }
         }
-        if(button_RB && button_LB)
-        {
-            // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
-            motor_drive_left.setPower(-1);
-            motor_drive_right.setPower(-1);
-        }
-        if(button_RB && button_LB)
-        {
-            // change done to previous ones not done to this, due to the fact that steering needs max. manueverability
-            motor_drive_left.setPower(1);
-            motor_drive_right.setPower(-1);
-        }
-        if(button_RB && 0 < button_LT)
-        {
-            motor_drive_left.setPower(-1);
-            motor_drive_right.setPower(1);
-        }
-        else {
-            motor_drive_left.setPower(0);
-            motor_drive_right.setPower(0);
-            //arm resets to default // TODO: 12/25/16
-            //pushButton.setPosition(ARM_RETRACTED_POSITION);
+        if (button_RT > 0) {
+            if (button_RB) {
+                motor_drive_right.setPower(-button_LT);
+            } else {
+                motor_drive_right.setPower(button_RT);
+            }
         }
     }
 }
