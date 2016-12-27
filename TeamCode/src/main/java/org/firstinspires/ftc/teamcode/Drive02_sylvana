@@ -28,8 +28,8 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
  *  Gamepad.b - shoot ball -
  *  <code that is commented out and indented will be added later>
  */
-@TeleOp(name = "Drive02_victor", group = "Tutorials")
-class Drive02_victor extends OpMode {
+@TeleOp(name = "Drive02_sylvana", group = "Tutorials")
+class Drive02_sylvana extends OpMode {
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
@@ -96,21 +96,34 @@ class Drive02_victor extends OpMode {
     @Override
     public void loop() {
 
-        motor_drive_left.setPower(-gamepad1.left_stick_y);
-        motor_drive_right.setPower(-gamepad1.right_stick_y);
-        // Repeatedly run code in here until stop button is pressed
-        /*
-        //Push button // TODO: 12/25/16
-        if (gamepad1.a)
+        if (0 < button_RT && 0 < button_LT)
         {
-            buttonServo.setPosition(ARM_EXTENDED_POSITION);
-
-
+            motor_drive_left.setPower(button_LT);
+            // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
+            motor_drive_right.setPower(button_LT);
+        }
+        if(button_RB && button_LB)
+        {
+            // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
+            motor_drive_left.setPower(-1);
+            motor_drive_right.setPower(-1);
+        }
+        if(button_RB && button_LB)
+        {
+            // change done to previous ones not done to this, due to the fact that steering needs max. manueverability
+            motor_drive_left.setPower(1);
+            motor_drive_right.setPower(-1);
+        }
+        if(button_RB && 0 < button_LT)
+        {
+            motor_drive_left.setPower(-1);
+            motor_drive_right.setPower(1);
         }
         else {
+            motor_drive_left.setPower(0);
+            motor_drive_right.setPower(0);
             //arm resets to default // TODO: 12/25/16
             //pushButton.setPosition(ARM_RETRACTED_POSITION);
         }
-        */
     }
 }
