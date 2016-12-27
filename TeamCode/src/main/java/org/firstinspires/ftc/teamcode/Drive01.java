@@ -75,7 +75,7 @@ public class Drive01 extends OpMode
 
         //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
-        motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
+        //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         //shooter_motor_1 = hardwareMap.dcMotor.get("Motor_Shooter_1");
         //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
         //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
