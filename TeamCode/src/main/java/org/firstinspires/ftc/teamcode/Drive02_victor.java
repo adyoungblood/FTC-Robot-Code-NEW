@@ -71,7 +71,7 @@ class Drive02_victor extends LinearOpMode
             }
             else {
                 //arm resets to default // TODO: 12/25/16
-                pushButton.setPosition(ARM_RETRACTED_POSITION);
+                //pushButton.setPosition(ARM_RETRACTED_POSITION);
             }
             // Give hardware a chance to catch up
             idle();
