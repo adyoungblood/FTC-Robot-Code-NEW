@@ -20,9 +20,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
-@TeleOp(name = "Wall Follow", group = "MRI")
+@TeleOp(name = "Wall_Follow", group = "MRI")
 //@Disabled
-public class MRI_ODS_Wall_Follow extends LinearOpMode {
+public class Wall_Follow extends LinearOpMode {
 
     //Instance of OpticalDistanceSensor
     OpticalDistanceSensor ODS;
