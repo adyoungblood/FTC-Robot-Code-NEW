@@ -109,10 +109,14 @@ class Drive02_sylvana extends OpMode {
         }
         if (button_RT > 0) {
             if (button_RB) {
-                motor_drive_right.setPower(-button_LT);
+                motor_drive_right.setPower(-button_RT);
             } else {
                 motor_drive_right.setPower(button_RT);
             }
+        }
+        if (button_LT == 0 && button_RT == 0) {
+            motor_drive_left.setPower(0);
+            motor_drive_right.setPower(0);
         }
     }
 }
