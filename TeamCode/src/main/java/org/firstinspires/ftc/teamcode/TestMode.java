@@ -134,7 +134,7 @@ public class TestMode extends OpMode {
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
 
-        if (gamepad1.a) {
+        if (button_RB) {
             double instant = runtime.seconds();
             telemetry.addData("Last Captured Instant:", instant);
             while (instant > runtime.seconds() - 1) {

@@ -26,6 +26,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "Drive02", group = "Tutorials")
 class Drive02 extends LinearOpMode
 {
+    // Initialization of joystick buttons:
+    public double button_RT;
+    public double button_LT;
+
+    public boolean button_RB;
+    public boolean button_LB;
     // Declare drive motors
     private DcMotor motorLeft;
     private DcMotor motorRight;
@@ -61,25 +67,25 @@ class Drive02 extends LinearOpMode
                     buttonServo.setPosition(ARM_EXTENDED_POSITION);
                 */
             // Move drivetrain if requested
-            if (gamepad1.a && gamepad2.a)
+            if (0 < button_RT && 0 < button_LT)
             {
-                motorLeft.setPower(1);
+                motorLeft.setPower(button_LT);
                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
-                motorRight.setPower(1);
+                motorRight.setPower(button_LT);
             }
-            if(gamepad1.b && gamepad2.b)
+            if(button_RB && button_LB)
             {
                 // Both set to same button to prevent the veering of motors; and to ensure robot actually goes straight
                 motorLeft.setPower(-1);
                 motorRight.setPower(-1);
             }
-            if(gamepad1.a && gamepad2.b)
+            if(button_RB && button_LB)
             {
                 // change done to previous ones not done to this, due to the fact that steering needs max. manueverability
                 motorLeft.setPower(1);
                 motorRight.setPower(-1);
             }
-            if(gamepad1.b && gamepad2.a)
+            if(button_RB && 0 < button_LT)
             {
                 motorLeft.setPower(-1);
                 motorRight.setPower(1);
