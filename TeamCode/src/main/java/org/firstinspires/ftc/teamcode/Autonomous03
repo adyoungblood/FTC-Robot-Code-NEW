@@ -15,12 +15,7 @@ import java.util.Date;
 
 @Autonomous(name="Autonomous03", group="Iterative Opmode")  // @TeleOp(...) is the other common choice
 
-enum State {
-    INITIALIZE, MOVE, CHECK, STOP
-}
-
 public class Autonomous03 extends LinearOpMode {
-    State state_s;
 
     public DcMotorController motor_controller_shooter;
     public DcMotor shooter_motor_1;
@@ -65,31 +60,14 @@ public class Autonomous03 extends LinearOpMode {
         motor_drive_left.setTargetPosition(0);
         motor_drive_right.setTargetPosition(0);
 
-        state_s = State.INITIALIZE;
-        switch (state_s) {
-            case INITIALIZE:
-                state_s = State.MOVE;
-                resetStartTime();
-                break;
-            case MOVE:
-                drive(1);
-                state_s = State.CHECK;
-                break;
-            case CHECK:
-                if (this.getRuntime() > 1000) { state_s = State.STOP; };
-                break;
-            case STOP:
-                this.stop();
-                break;
-            default:
-                state_s = State.STOP;
-                break;
+        drive(1);
         }
-    }
 
 
 
     public void drive(int distance) {
+        motor_drive_left.setTargetPosition(distance);
+        motor_drive_right.setTargetPosition(distance);
         // TODO Test how many turns it takes to go how many inches
     }
 /*
