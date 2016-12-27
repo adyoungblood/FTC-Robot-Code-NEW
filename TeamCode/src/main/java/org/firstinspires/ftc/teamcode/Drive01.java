@@ -77,27 +77,10 @@ public class Drive01 extends OpMode
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
         motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         //shooter_motor_1 = hardwareMap.dcMotor.get("Motor_Shooter_1");
-        intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
-        intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
+        //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
+        //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
-
-        //power_level = 1.0;
-        //power_back = 0.7;
-
-
-        /* eg: Initialize the hardware variables. Note that the strings used here as parameters
-         * to 'get' must correspond to the names assigned during the robot configuration
-         * step (using the FTC Robot Controller app on the phone).
-         */
-        // leftMotor  = hardwareMap.dcMotor.get("left motor");
-        // rightMotor = hardwareMap.dcMotor.get("right motor");
-
-        // eg: Set the drive motor directions:
-        // Reverse the motor that runs backwards when connected directly to the battery
-        // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        //  rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        // telemetry.addData("Status", "Initialized");
     }
 
     /*
