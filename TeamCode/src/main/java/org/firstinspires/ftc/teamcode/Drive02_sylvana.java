@@ -101,19 +101,19 @@ class Drive02_sylvana extends OpMode {
         button_LT = gamepad1.left_trigger;
 
         if (button_LT > 0) {
-            if (button_LB) {
-                motor_drive_left.setPower(-button_LT);
-            } else {
+            if (!button_LB) {
                 motor_drive_left.setPower(button_LT);
+            } else {
+                motor_drive_left.setPower(-button_LT);
             }
         } else {
             motor_drive_left.setPower(0);
         }
         if (button_RT > 0) {
-            if (button_RB) {
-                motor_drive_right.setPower(-button_RT);
-            } else {
+            if (!button_RB) {
                 motor_drive_right.setPower(button_RT);
+            } else {
+                motor_drive_right.setPower(-button_RT);
             }
         } else {
             motor_drive_right.setPower(0);
