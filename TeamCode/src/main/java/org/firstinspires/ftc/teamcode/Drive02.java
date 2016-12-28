@@ -28,8 +28,8 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
  *  Gamepad.b - shoot ball -
  *  <code that is commented out and indented will be added later>
  */
-@TeleOp(name = "Drive02_victor", group = "Iterative Opmode")
-class Drive02_victor extends OpMode {
+@TeleOp(name = "Drive02", group = "Iterative Opmode")
+class Drive02 extends OpMode {
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
