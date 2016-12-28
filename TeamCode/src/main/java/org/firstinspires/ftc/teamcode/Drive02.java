@@ -96,8 +96,16 @@ class Drive02 extends OpMode {
     @Override
     public void loop() {
 
-        motor_drive_left.setPower(-gamepad1.left_stick_y);
-        motor_drive_right.setPower(-gamepad1.right_stick_y);
+        double left_trigger = -gamepad1.left_stick_y;
+        double right_trigger = -gamepad1.right_stick_y;
+
+        if (gamepad1.start) {
+            left_trigger = left_trigger / 2;
+            right_trigger = right_trigger / 2;
+        }
+
+        motor_drive_left.setPower(left_trigger);
+        motor_drive_right.setPower(right_trigger);
         // Repeatedly run code in here until stop button is pressed
         /*
         //Push button // TODO: 12/25/16

@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package org.firstinspires.ftc.teamcode;
 
 import android.content.Context;
 
@@ -101,7 +101,7 @@ public class FtcConfig {
     y1 = opMode.gamepad1.y;
     start1 = opMode.gamepad1.start;
 
-    opMode.telemetry.clearData();
+    opMode.telemetry.clear();
 
     currConfigStepCheck = ConfigStep.TEST_GAMEPAD1;
     // message to driver about state of this config parameter

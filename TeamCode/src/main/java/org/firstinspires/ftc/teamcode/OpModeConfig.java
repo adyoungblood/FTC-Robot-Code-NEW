@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.myPackageName;
+package org.firstinspires.ftc.teamcode;
 // change myPackageName to wherever you put this file.  change it to opmodes if you put it in the generic opmodes folder.
 
 import android.content.Context;
@@ -95,7 +95,7 @@ public class OpModeConfig extends OpMode {
     y1 = gamepad1.y;
     start1 = gamepad1.start;
 
-    telemetry.clearData();
+    telemetry.clear();
 
     currConfigCheck = Config.TEST_GAMEPAD1;
     // message to driver about state of this config parameter
@@ -231,7 +231,7 @@ public class OpModeConfig extends OpMode {
 
   @Override
   public void loop() {
-    telemetry.clearData();
+    telemetry.clear();
     // can use configured variables here
   }
 

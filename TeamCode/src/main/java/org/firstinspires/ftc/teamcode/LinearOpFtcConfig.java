@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -33,7 +33,7 @@ public class LinearOpFtcConfig extends LinearOpMode {
     // run the opmode, using the configured variables here
     // can do state machine style or linear style
     while (opModeIsActive()) {
-      telemetry.clearData();
+      telemetry.clear();
       telemetry.addData("A","Running the LinearOpMode now");
       telemetry.addData("ColorIsRed", Boolean.toString(ftcConfig.param.colorIsRed));
       telemetry.addData("DelayInSec", Integer.toString(ftcConfig.param.delayInSec));
@@ -41,7 +41,7 @@ public class LinearOpFtcConfig extends LinearOpMode {
       waitOneFullHardwareCycle();
     }
 
-    telemetry.clearData();
+    telemetry.clear();
     telemetry.addData("A","LinearOpMode no longer running");
 
   }

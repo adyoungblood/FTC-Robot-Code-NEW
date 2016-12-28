@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -19,7 +19,7 @@ public class OpFtcConfig extends OpMode {
 
   @Override
   public void loop() {
-    telemetry.clearData();
+    telemetry.clear();
     // can use configured variables here
     telemetry.addData("ColorIsRed", Boolean.toString(ftcConfig.param.colorIsRed));
     telemetry.addData("DelayInSec", Integer.toString(ftcConfig.param.delayInSec));
