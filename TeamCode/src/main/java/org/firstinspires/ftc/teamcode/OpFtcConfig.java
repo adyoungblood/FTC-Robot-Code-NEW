@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 public class OpFtcConfig extends OpMode {
 //
 
-  FtcConfig ftcConfig=new FtcConfig();
+  FtcConfig ftcConfig = new FtcConfig();
 
   @Override
   public void init() {
