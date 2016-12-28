@@ -60,12 +60,14 @@ public class Autonomous03 extends LinearOpMode {
         motor_drive_left.setTargetPosition(0);
         motor_drive_right.setTargetPosition(0);
 
-        drive(1);
+        drive(360, 1);
         }
 
 
 
-    public void drive(int distance) {
+    public void drive(int distance, int power) {
+        motor_drive_left.setPower(power);
+        motor_drive_right.setPower(power);
         motor_drive_left.setTargetPosition(distance);
         motor_drive_right.setTargetPosition(distance);
         // TODO Test how many turns it takes to go how many inches
