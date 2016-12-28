@@ -118,5 +118,11 @@ class Drive02_sylvana extends OpMode {
         } else {
             motor_drive_right.setPower(0);
         }
+
+        telemetry.addData("Left Trigger Power", button_LT);
+        telemetry.addData("Right Trigger Power", button_RT);
+        telemetry.addData("Left Motor Power", motor_drive_left.getPower());
+        telemetry.addData("Right Motor Power", motor_drive_left.getPower());
+
     }
 }
