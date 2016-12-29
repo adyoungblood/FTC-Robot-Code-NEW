@@ -83,12 +83,12 @@ class Drive02 extends OpMode {
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
-        // TODO: 12/25/16 Declare
+        //
         //buttonServo = hardwareMap.servo.get("buttonServo");
         // If drive motors are given full power, robot would spin because of the motors being in
         // opposite directions. So reverse one
         motor_drive_left.setDirection(DcMotor.Direction.REVERSE);
-        //Declare positions of buttonServo // TODO: 12/25/16
+        //Declare positions of buttonServo //
         final double ARM_RETRACTED_POSITION = 0.2;
         final double ARM_EXTENDED_POSITION = 0.8;
     }
@@ -108,7 +108,7 @@ class Drive02 extends OpMode {
         motor_drive_right.setPower(right_trigger);
         // Repeatedly run code in here until stop button is pressed
         /*
-        //Push button // TODO: 12/25/16
+        //Push button //
         if (gamepad1.a)
         {
             buttonServo.setPosition(ARM_EXTENDED_POSITION);
@@ -116,7 +116,7 @@ class Drive02 extends OpMode {
 
         }
         else {
-            //arm resets to default // TODO: 12/25/16
+            //arm resets to default //
             //pushButton.setPosition(ARM_RETRACTED_POSITION);
         }
         */
