@@ -91,6 +91,8 @@ class Drive02 extends OpMode {
         //Declare positions of buttonServo //
         final double ARM_RETRACTED_POSITION = 0.2;
         final double ARM_EXTENDED_POSITION = 0.8;
+        gamepad1.setJoystickDeadzone((float)0.2);
+
     }
 
     @Override
