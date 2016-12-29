@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
+import java.math.*;
+
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 /* (V 2.1 of drivetrain program)
@@ -106,8 +108,8 @@ class Drive02 extends OpMode {
             right_trigger = right_trigger / 2;
         }
 
-        motor_drive_left.setPower(left_trigger);
-        motor_drive_right.setPower(right_trigger);
+        motor_drive_left.setPower(Math.pow(left_trigger, 3));
+        motor_drive_right.setPower(Math.pow(right_trigger, 3));
         // Repeatedly run code in here until stop button is pressed
         /*
         //Push button //
