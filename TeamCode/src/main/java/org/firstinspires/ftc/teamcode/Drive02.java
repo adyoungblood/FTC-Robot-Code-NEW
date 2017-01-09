@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -79,6 +82,9 @@ class Drive02 extends OpMode {
     // private DcMotor leftMotor = null;
     // private DcMotor rightMotor = null;
 
+    public SoundPool mySound;
+    public int beepID;
+
     @Override
     public void init() {
         // Initialize drive motors
@@ -95,6 +101,10 @@ class Drive02 extends OpMode {
         final double ARM_EXTENDED_POSITION = 0.8;
         gamepad1.setJoystickDeadzone((float)0.2);
 
+        //noinspection deprecation
+        mySound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        beepID = mySound.load(hardwareMap.appContext, R.raw.StartupSoundXP, 1);
+
     }
 
     @Override
@@ -106,6 +116,10 @@ class Drive02 extends OpMode {
         if (gamepad1.start) {
             left_trigger = left_trigger / 2;
             right_trigger = right_trigger / 2;
+        }
+
+        if (gamepad1.dpad_left) {
+            mySound.play(beepID,1,1,1,0,1);
         }
 
         motor_drive_left.setPower(Math.pow(left_trigger, 3));
