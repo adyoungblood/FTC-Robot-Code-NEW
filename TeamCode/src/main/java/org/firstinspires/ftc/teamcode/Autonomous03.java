@@ -279,7 +279,8 @@ public class Autonomous03 extends OpMode {
       if (autonType == autonType.GO_FOR_BEACON) {
           drive(1, 1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN) {
-          drive(2, 1);
+          drive(1, 1);
+          drive(-1, 1);
       } else {
 
       }
