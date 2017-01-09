@@ -87,6 +87,7 @@ class Drive02 extends OpMode {
 
     @Override
     public void init() {
+        telemetry.clear();
         // Initialize drive motors
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
@@ -103,12 +104,13 @@ class Drive02 extends OpMode {
 
         //noinspection deprecation
         mySound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        beepID = mySound.load(hardwareMap.appContext, R.raw.StartupSoundXP, 1);
-
+        beepID = mySound.load(hardwareMap.appContext, R.raw.startupsoundxp, 1);
+        mySound.play(beepID,1,1,1,0,1);
     }
 
     @Override
     public void loop() {
+        telemetry.addData("Status", "Initialized");
 
         double left_trigger = -gamepad1.left_stick_y;
         double right_trigger = -gamepad1.right_stick_y;
@@ -118,9 +120,7 @@ class Drive02 extends OpMode {
             right_trigger = right_trigger / 2;
         }
 
-        if (gamepad1.dpad_left) {
-            mySound.play(beepID,1,1,1,0,1);
-        }
+        mySound.play(beepID,1,1,1,0,1);
 
         motor_drive_left.setPower(Math.pow(left_trigger, 3));
         motor_drive_right.setPower(Math.pow(right_trigger, 3));
