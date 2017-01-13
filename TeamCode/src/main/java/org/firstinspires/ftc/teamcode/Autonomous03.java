@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 // change myPackageName to wherever you put this file.  change it to opmodes if you put it in the generic opmodes folder.
-//test maymay
 
 import android.content.Context;
 
