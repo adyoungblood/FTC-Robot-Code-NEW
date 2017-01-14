@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -41,7 +42,7 @@ class Drive02 extends OpMode {
     public DcMotor shooter_motor_1;
     public DcMotor intake_motor_1;
     public DcMotor intake_motor_2;
-
+    public Servo buttonServo;
     public DcMotorController motor_controller_drive;
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
@@ -75,6 +76,8 @@ class Drive02 extends OpMode {
     public double joystick1_right_x;
     public double joystick2_right_y;
 
+    public double ARM_RETRACTED_POSITION = 0.2;
+    public double ARM_EXTENDED_POSITION = 0.8;
 
     public double left_train_power;
     public double right_train_power;
@@ -93,13 +96,12 @@ class Drive02 extends OpMode {
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
         //
-        //buttonServo = hardwareMap.servo.get("buttonServo");
+        buttonServo = hardwareMap.servo.get("buttonServo");
         // If drive motors are given full power, robot would spin because of the motors being in
         // opposite directions. So reverse one
         motor_drive_left.setDirection(DcMotor.Direction.REVERSE);
         //Declare positions of buttonServo //
-        final double ARM_RETRACTED_POSITION = 0.2;
-        final double ARM_EXTENDED_POSITION = 0.8;
+
         gamepad1.setJoystickDeadzone((float)0.2);
 
         //noinspection deprecation
@@ -125,7 +127,7 @@ class Drive02 extends OpMode {
         motor_drive_left.setPower(Math.pow(left_trigger, 3));
         motor_drive_right.setPower(Math.pow(right_trigger, 3));
         // Repeatedly run code in here until stop button is pressed
-        /*
+
         //Push button //
         if (gamepad1.a)
         {
@@ -135,8 +137,8 @@ class Drive02 extends OpMode {
         }
         else {
             //arm resets to default //
-            //pushButton.setPosition(ARM_RETRACTED_POSITION);
+            buttonServo.setPosition(ARM_RETRACTED_POSITION);
         }
-        */
+
     }
 }

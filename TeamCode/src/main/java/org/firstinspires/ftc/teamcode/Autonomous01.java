@@ -12,23 +12,28 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Autonomous(name="Autonomous01", group="Linear Opmode")  // @TeleOp(...) is the other common choice
+/*
 
+ */
 public class Autonomous01 extends LinearOpMode {
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
     public DcMotor shooter_motor_1;
     public DcMotor intake_motor_1;
+    public Servo buttonServo;
 
     public DcMotorController motor_controller_drive;
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
-
+    public double ARM_RETRACTED_POSITION = 0.2;
+    public double ARM_EXTENDED_POSITION = 0.8;
     // Initilization of drive train variables:
     //public double power_forward;
     public double power_back;
@@ -74,6 +79,8 @@ public class Autonomous01 extends LinearOpMode {
                 driveFor(1, 1, 1500);
                 driveFor(-1, 1, 3000);
                 driveFor(0, 0, 1000);
+                // buttonServo.setPosition(ARM_EXTENDED_POSITION);
+                //buttonServo.setPosition(ARM_RETRACTED_POSITION);
             telemetry.addData("OpMode complete", "");
             break;
         }

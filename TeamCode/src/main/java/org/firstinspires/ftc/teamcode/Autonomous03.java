@@ -18,7 +18,7 @@ import java.io.OutputStreamWriter;
 public class Autonomous03 extends OpMode {
 
     public DcMotorController motor_controller_shooter;
-    public DcMotor shooter_motor_1;
+    public DcMotor andymarkneverest40;
     public DcMotor intake_motor_1;
     public DcMotor intake_motor_2;
 
@@ -78,7 +78,7 @@ public class Autonomous03 extends OpMode {
       //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
       motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
       //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
-      //shooter_motor_1 = hardwareMap.dcMotor.get("Motor_Shooter_1");
+      andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
       //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
       //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
       motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
@@ -145,7 +145,7 @@ public class Autonomous03 extends OpMode {
     // message to driver about state of this config parameter
     if (configState.ordinal() >= currConfigCheck.ordinal()) {
       if (!gamepad1IsOK) {
-        telemetry.addData("C" + currConfigCheck.ordinal(), "GAMEPAD1 NOT VERIFIED!!!");
+        telemetry.addData("C" + currConfigCheck.ordinal(), "GAMEPAD1 NOT VERIFIED!!!yoot");
       }
     }
     // configure this parameter
