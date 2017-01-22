@@ -14,6 +14,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous
 public class AutonomousForward extends LinearOpMode {
 
+    GlobalFunctions myGlog;
+
     private ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_drive;
     public DcMotor motor_drive_left;
@@ -34,7 +36,8 @@ public class AutonomousForward extends LinearOpMode {
         while (opModeIsActive()) {
             if (x == 0) {
 
-                driveFor(0.75, 4);
+                //1 second is about 50 inches @ 75% power
+                myGlog.driveFor(2);
 
             /*
             try {
@@ -56,20 +59,4 @@ public class AutonomousForward extends LinearOpMode {
             }
         }
     }
-
-    public void driveFor(double power, int seconds) {
-        motor_drive_right.setPower(power);
-        motor_drive_left.setPower(power);
-
-        seconds = seconds * 1000;
-
-        instant = runtime.milliseconds();
-        while (instant > runtime.milliseconds() - seconds) {
-            telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
-        }
-
-        motor_drive_left.setPower(0);
-        motor_drive_right.setPower(0);
-    }
-
 }

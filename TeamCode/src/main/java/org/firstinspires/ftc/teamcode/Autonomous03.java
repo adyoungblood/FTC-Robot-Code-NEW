@@ -24,6 +24,8 @@ import java.io.OutputStreamWriter;
 @Autonomous
 public class Autonomous03 extends OpMode {
 
+    GlobalFunctions myGlog;
+
     public DcMotorController motor_controller_shooter;
     public DcMotor intake_motor_1;
     public DcMotor intake_motor_2;
@@ -348,26 +350,17 @@ public class Autonomous03 extends OpMode {
       */
 
       if (autonType == autonType.GO_FOR_BEACON && colorIsRed) {
-          drive(1, 1);
+          myGlog.driveFor(1, 1);
       } else if (autonType == autonType.GO_FOR_BEACON && !colorIsRed) {
-          drive(-1, 1);
+          myGlog.driveFor(-1, 1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && colorIsRed) {
-          drive(1, -1);
+          myGlog.driveFor(1, -1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && !colorIsRed) {
-          drive(-1, -1);
+          myGlog.driveFor(-1, -1);
       }
     // can use configured variables here
 
       telemetry.update();
 
   }
-
-  public void drive(int distance, int power) {
-    motor_drive_left.setPower(power);
-    motor_drive_right.setPower(power);
-    motor_drive_left.setTargetPosition(distance * 1000);
-    motor_drive_right.setTargetPosition(distance * 1000);
-    // TODO Test how many turns it takes to go how many inches
-  }
-
 }
