@@ -7,9 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import static android.R.attr.x;
+
 
 @Autonomous
 public class AutonomousForward extends OpMode {
