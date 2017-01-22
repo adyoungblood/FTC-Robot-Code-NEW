@@ -33,17 +33,8 @@ public class AutonomousForward extends OpMode {
     @Override
     public void loop() {
         if (x == 0) {
-            motor_drive_right.setPower(0.75);
-            motor_drive_left.setPower(0.75);
 
-
-            instant = runtime.milliseconds();
-            while (instant > runtime.milliseconds() - 4000) {
-                telemetry.addData("Time Left", (4000 - (runtime.milliseconds() - instant)));
-            }
-
-            motor_drive_left.setPower(0);
-            motor_drive_right.setPower(0);
+            driveFor(0.75, 4);
 
             /*
             try {
@@ -58,6 +49,21 @@ public class AutonomousForward extends OpMode {
         } else {
             telemetry.addData("Status", "Autonomous done");
         }
+    }
+
+    public void driveFor(double power, int seconds) {
+        motor_drive_right.setPower(power);
+        motor_drive_left.setPower(power);
+
+        seconds = seconds * 1000;
+
+        instant = runtime.milliseconds();
+        while (instant > runtime.milliseconds() - seconds) {
+            telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
+        }
+
+        motor_drive_left.setPower(0);
+        motor_drive_right.setPower(0);
     }
 
 }

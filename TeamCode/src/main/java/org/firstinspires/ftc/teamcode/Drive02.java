@@ -95,6 +95,8 @@ class Drive02 extends OpMode {
     double left_trigger;
     double right_trigger;
 
+    double instant;
+
     @Override
     public void init() {
         telemetry.clear();
@@ -165,9 +167,6 @@ class Drive02 extends OpMode {
             right_trigger = 0;
         }
 
-        motor_drive_left.setPower(left_trigger);
-        motor_drive_right.setPower(right_trigger);
-
         //Push button //
         if (gamepad1.a)
         {
@@ -179,8 +178,33 @@ class Drive02 extends OpMode {
     //        buttonServo.setPosition(ARM_RETRACTED_POSITION);
         }
 
+        if (gamepad1.x) {
+            left_trigger = 0;
+            right_trigger = 0;
+            driveFor(0.5, 1.5);
+        }
+
+        motor_drive_left.setPower(left_trigger);
+        motor_drive_right.setPower(right_trigger);
+
         startPrev = startButton;
         telemetry.addData("Start Button", startButton);
         telemetry.addData("Start Previous", startPrev);
     }
+
+    public void driveFor(double power, double seconds) {
+        motor_drive_right.setPower(power);
+        motor_drive_left.setPower(power);
+
+        seconds = seconds * 1000;
+
+        instant = runtime.milliseconds();
+        while (instant > runtime.milliseconds() - seconds) {
+            telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
+        }
+
+        motor_drive_left.setPower(0);
+        motor_drive_right.setPower(0);
+    }
+
 }
