@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 @Autonomous
-public class AutonomousForward extends OpMode {
+public class AutonomousForward extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_drive;
@@ -22,19 +23,18 @@ public class AutonomousForward extends OpMode {
     int x = 0;
 
     @Override
-    public void init() {
+    public void runOpMode() {
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
         motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
         motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
-    }
 
-    @Override
-    public void loop() {
-        if (x == 0) {
 
-            driveFor(0.75, 4);
+        while (opModeIsActive()) {
+            if (x == 0) {
+
+                driveFor(0.75, 4);
 
             /*
             try {
@@ -45,9 +45,15 @@ public class AutonomousForward extends OpMode {
             motor_drive_left.setPower(0);
             motor_drive_right.setPower(0);
             */
-            x++;
-        } else {
-            telemetry.addData("Status", "Autonomous done");
+                x++;
+            } else {
+                telemetry.addData("Status", "Autonomous done");
+                requestOpModeStop();
+                resetStartTime();
+                stop();
+                gamepad1.reset();
+                gamepad2.reset();
+            }
         }
     }
 
