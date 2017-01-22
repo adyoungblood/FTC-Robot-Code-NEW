@@ -62,10 +62,5 @@ class SoundTest extends OpMode {
         if (gamepad1.dpad_up) {
             mySound.play(zylon, 1, 1, 1, 0, 1);
         }
-        if (gamepad1.dpad_down) {
-            for (int n = 0; n < 7; n++) {
-                mySound.stop(n);
-            }
-        }
     }
 }

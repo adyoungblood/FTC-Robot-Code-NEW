@@ -1,13 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 // change myPackageName to wherever you put this file.  change it to opmodes if you put it in the generic opmodes folder.
-//test maymay
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
+import com.qualcomm.robotcore.hardware.DigitalChannelController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,16 +21,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+@Autonomous
 public class Autonomous03 extends OpMode {
 
     public DcMotorController motor_controller_shooter;
-    public DcMotor andymarkneverest40;
     public DcMotor intake_motor_1;
     public DcMotor intake_motor_2;
 
     public DcMotorController motor_controller_drive;
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
+
+    public DcMotorController motor_controller_other;
+    public DcMotor andymarkneverest40;
 
     // Initilization of drive train variables:
     //public double power_forward;
@@ -36,6 +45,21 @@ public class Autonomous03 extends OpMode {
     // Initilization of drive train variables:
     //public double power_forward;
     public double power_shooter;
+
+    ColorSensor sensorRGB;
+    DeviceInterfaceModule cdim;
+
+    // we assume that the LED pin of the RGB sensor is connected to
+    // digital port 5 (zero indexed).
+    static final int LED_CHANNEL = 5;
+
+    float hsvValues[] = {0F,0F,0F};
+    final float values[] = hsvValues;
+    final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(com.qualcomm.ftcrobotcontroller.R.id.RelativeLayout);
+
+    boolean bPrevState = false;
+    boolean bCurrState = false;
+    boolean bLedOn = true;
 
   private enum Config {
     TEST_GAMEPAD1,
@@ -70,6 +94,7 @@ public class Autonomous03 extends OpMode {
   boolean lastBack1, lastA1, lastB2, lastY1, lastStart1;
   private String configFileName="FtcRobotConfig.txt";
 
+
   @Override
   public void init() {
 
@@ -77,7 +102,8 @@ public class Autonomous03 extends OpMode {
 
       //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
       motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
-      //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
+      //motor_controller_intake = hardwareMap.dcMotorController.get("Motor_Controller_Intake");
+      motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
       andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
       //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
       //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
@@ -87,11 +113,20 @@ public class Autonomous03 extends OpMode {
       motor_drive_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       motor_drive_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-      motor_drive_left.setDirection(DcMotorSimple.Direction.FORWARD);
-      motor_drive_right.setDirection(DcMotorSimple.Direction.REVERSE);
+      motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
+      motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
 
       motor_drive_left.setTargetPosition(0);
       motor_drive_right.setTargetPosition(0);
+
+      /*
+
+      cdim = hardwareMap.deviceInterfaceModule.get("dim");
+      cdim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
+      sensorRGB = hardwareMap.colorSensor.get("color");
+      cdim.setDigitalChannelState(LED_CHANNEL, bLedOn);
+
+      */
 
     // setup initial configuration parameters here
     gamepad1IsOK=false;
@@ -145,7 +180,7 @@ public class Autonomous03 extends OpMode {
     // message to driver about state of this config parameter
     if (configState.ordinal() >= currConfigCheck.ordinal()) {
       if (!gamepad1IsOK) {
-        telemetry.addData("C" + currConfigCheck.ordinal(), "GAMEPAD1 NOT VERIFIED!!!yoot");
+        telemetry.addData("C" + currConfigCheck.ordinal(), "GAMEPAD1 NOT VERIFIED!!!");
       }
     }
     // configure this parameter
@@ -277,15 +312,54 @@ public class Autonomous03 extends OpMode {
   public void loop() {
     telemetry.clear();
 
-      if (autonType == autonType.GO_FOR_BEACON) {
-          drive(1, 1);
-      } else if (autonType == autonType.GO_FOR_MOUNTAIN) {
-          drive(1, 1);
-          drive(-1, 1);
-      } else {
 
+      /*
+      bCurrState = gamepad1.x;
+
+      if ((bCurrState == true) && (bCurrState != bPrevState))  {
+
+          // button is transitioning to a pressed state. Toggle the LED.
+          bLedOn = !bLedOn;
+          cdim.setDigitalChannelState(LED_CHANNEL, bLedOn);
+      }
+
+      // update previous state variable.
+      bPrevState = bCurrState;
+
+      // convert the RGB values to HSV values.
+      Color.RGBToHSV((sensorRGB.red() * 255) / 800, (sensorRGB.green() * 255) / 800, (sensorRGB.blue() * 255) / 800, hsvValues);
+
+      // send the info back to driver station using telemetry function.
+      telemetry.addData("LED", bLedOn ? "On" : "Off");
+      telemetry.addData("Clear", sensorRGB.alpha());
+      telemetry.addData("Red  ", sensorRGB.red());
+      telemetry.addData("Green", sensorRGB.green());
+      telemetry.addData("Blue ", sensorRGB.blue());
+      telemetry.addData("Hue", hsvValues[0]);
+
+      // change the background color to match the color detected by the RGB sensor.
+      // pass a reference to the hue, saturation, and value array as an argument
+      // to the HSVToColor method.
+      relativeLayout.post(new Runnable() {
+          public void run() {
+              relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
+          }
+      });
+      */
+
+      if (autonType == autonType.GO_FOR_BEACON && colorIsRed) {
+          drive(1, 1);
+      } else if (autonType == autonType.GO_FOR_BEACON && !colorIsRed) {
+          drive(-1, 1);
+      } else if (autonType == autonType.GO_FOR_MOUNTAIN && colorIsRed) {
+          drive(1, -1);
+      } else if (autonType == autonType.GO_FOR_MOUNTAIN && !colorIsRed) {
+          drive(-1, -1);
       }
     // can use configured variables here
+
+      telemetry.update();
+
   }
 
   public void drive(int distance, int power) {

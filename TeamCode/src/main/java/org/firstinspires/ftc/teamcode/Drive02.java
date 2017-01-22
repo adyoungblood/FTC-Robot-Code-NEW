@@ -82,11 +82,18 @@ class Drive02 extends OpMode {
     public double left_train_power;
     public double right_train_power;
 
+    public boolean startButton;
+    public boolean startPrev;
+    public boolean speed;
+
     // private DcMotor leftMotor = null;
     // private DcMotor rightMotor = null;
 
     public SoundPool mySound;
     public int beepID;
+
+    double left_trigger;
+    double right_trigger;
 
     @Override
     public void init() {
@@ -96,49 +103,84 @@ class Drive02 extends OpMode {
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
         //
-        buttonServo = hardwareMap.servo.get("buttonServo");
+//        buttonServo = hardwareMap.servo.get("buttonServo");
         // If drive motors are given full power, robot would spin because of the motors being in
         // opposite directions. So reverse one
-        motor_drive_left.setDirection(DcMotor.Direction.REVERSE);
+        motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
         //Declare positions of buttonServo //
 
         gamepad1.setJoystickDeadzone((float)0.2);
+
 
         //noinspection deprecation
         mySound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         beepID = mySound.load(hardwareMap.appContext, R.raw.startupsoundxp, 1);
         mySound.play(beepID,1,1,1,0,1);
+
+        speed = false;
+
+        startPrev = false;
     }
 
     @Override
     public void loop() {
         telemetry.addData("Status", "Initialized");
 
-        double left_trigger = -gamepad1.left_stick_y;
-        double right_trigger = -gamepad1.right_stick_y;
+        startButton = gamepad1.start;
+        left_trigger = -gamepad1.left_stick_y;
+        right_trigger = -gamepad1.right_stick_y;
 
-        if (gamepad1.start) {
+        if (startButton && !startPrev) {
+            speed = true;
+        } else {
+            speed = false;
+        }
+
+        if (speed) {
             left_trigger = left_trigger / 2;
             right_trigger = right_trigger / 2;
+            telemetry.addData("Speed", "Slow");
+        } else {
+            telemetry.addData("Speed", "Fast");
         }
 
         mySound.play(beepID,1,1,1,0,1);
 
-        motor_drive_left.setPower(Math.pow(left_trigger, 3));
-        motor_drive_right.setPower(Math.pow(right_trigger, 3));
-        // Repeatedly run code in here until stop button is pressed
+
+
+        if (Math.pow(left_trigger, 3) > 0) {
+            left_trigger = Math.max(Math.pow(left_trigger, 3), 0.7);
+        } else if (Math.pow(left_trigger, 3) < 0) {
+            left_trigger = Math.min(Math.pow(left_trigger, 3), -0.7);
+        } else {
+            left_trigger = 0;
+        }
+
+        if (Math.pow(right_trigger, 3) > 0) {
+            right_trigger = Math.max(Math.pow(right_trigger, 3), 0.7);
+        } else if (Math.pow(right_trigger, 3) < 0) {
+            right_trigger = Math.min(Math.pow(right_trigger, 3), -0.7);
+        } else {
+            right_trigger = 0;
+        }
+
+        motor_drive_left.setPower(left_trigger);
+        motor_drive_right.setPower(right_trigger);
 
         //Push button //
         if (gamepad1.a)
         {
-            buttonServo.setPosition(ARM_EXTENDED_POSITION);
-
+  //          buttonServo.setPosition(ARM_EXTENDED_POSITION);
 
         }
         else {
             //arm resets to default //
-            buttonServo.setPosition(ARM_RETRACTED_POSITION);
+    //        buttonServo.setPosition(ARM_RETRACTED_POSITION);
         }
 
+        startPrev = startButton;
+        telemetry.addData("Start Button", startButton);
+        telemetry.addData("Start Previous", startPrev);
     }
 }

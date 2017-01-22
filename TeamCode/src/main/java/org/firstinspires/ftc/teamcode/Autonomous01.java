@@ -60,6 +60,9 @@ public class Autonomous01 extends LinearOpMode {
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
 
+        motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
+
         /* eg: Initialize the hardware variables. Note that the strings used here as parameters
          * to 'get' must correspond to the names assigned during the robot configuration
          * step (using the FTC Robot Controller app on the phone).
