@@ -24,32 +24,7 @@ import java.io.OutputStreamWriter;
 @Autonomous
 public class Autonomous03 extends OpMode {
 
-    GlobalFunctions myGlog;
-
-    public DcMotorController motor_controller_shooter;
-    public DcMotor intake_motor_1;
-    public DcMotor intake_motor_2;
-
-    public DcMotorController motor_controller_drive;
-    public DcMotor motor_drive_left;
-    public DcMotor motor_drive_right;
-
-    public DcMotorController motor_controller_other;
-    public DcMotor andymarkneverest40;
-
-    // Initilization of drive train variables:
-    //public double power_forward;
-    public double power_back;
-    //    public double power_RT;
-//    public double power_LT;
-    public double power_level;
-
-    // Initilization of drive train variables:
-    //public double power_forward;
-    public double power_shooter;
-
-    ColorSensor sensorRGB;
-    DeviceInterfaceModule cdim;
+    GlobalFunctions g;
 
     // we assume that the LED pin of the RGB sensor is connected to
     // digital port 5 (zero indexed).
@@ -106,23 +81,23 @@ public class Autonomous03 extends OpMode {
       telemetry.addData("Status", "Initialized");
 
       //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
-      motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
+      g.motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
       //motor_controller_intake = hardwareMap.dcMotorController.get("Motor_Controller_Intake");
-      motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
-      andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
+      g.motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
+      g.andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
       //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
       //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
-      motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
-      motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
+      g.motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
+      g.motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
 
-      motor_drive_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-      motor_drive_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      g.motor_drive_left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+      g.motor_drive_right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-      motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
-      motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
+      g.motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
+      g.motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
 
-      motor_drive_left.setTargetPosition(0);
-      motor_drive_right.setTargetPosition(0);
+      g.motor_drive_left.setTargetPosition(0);
+      g.motor_drive_right.setTargetPosition(0);
 
       /*
 
@@ -353,13 +328,13 @@ public class Autonomous03 extends OpMode {
       */
 
       if (autonType == autonType.GO_FOR_BEACON && colorIsRed) {
-          myGlog.driveFor(0.25, 1, 1);
+          g.driveFor(0.25, 1, 1);
       } else if (autonType == autonType.GO_FOR_BEACON && !colorIsRed) {
-          myGlog.driveFor(0.25, 1, -1);
+          g.driveFor(0.25, 1, -1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && colorIsRed) {
-          myGlog.driveFor(0.25, -1, 1);
+          g.driveFor(0.25, -1, 1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && !colorIsRed) {
-          myGlog.driveFor(0.25, -1, -1);
+          g.driveFor(0.25, -1, -1);
       }
     // can use configured variables here
 

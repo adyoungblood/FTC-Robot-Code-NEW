@@ -4,8 +4,10 @@ import android.content.Context;
 import android.media.SoundPool;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -26,7 +28,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
         this.mContext = context;
     }
 
-    private ElapsedTime runtime = new ElapsedTime();
+    public ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_drive;
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
@@ -35,6 +37,8 @@ public abstract class GlobalFunctions extends LinearOpMode {
     public DcMotor intake_motor_1;
     public DcMotor intake_motor_2;
     public Servo buttonServo;
+    public DcMotorController motor_controller_other;
+    public DcMotor andymarkneverest40;
 
     // Initilization of drive train variables:
     //public double power_forward;
@@ -83,6 +87,9 @@ public abstract class GlobalFunctions extends LinearOpMode {
 
     double left_trigger;
     double right_trigger;
+
+    ColorSensor sensorRGB;
+    DeviceInterfaceModule cdim;
 
     double instant;
 
