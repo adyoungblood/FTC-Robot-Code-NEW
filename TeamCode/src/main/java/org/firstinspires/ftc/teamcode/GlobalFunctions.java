@@ -98,13 +98,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
         motor_drive_left.setPower(left_power);
 
         //1 second = 50 inches
-        seconds = seconds * 1000;
-
-        instant = runtime.milliseconds();
-        while (instant > runtime.milliseconds() - seconds) {
-            telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
-
-        }
+        wait(seconds);
 
         motor_drive_left.setPower(0);
         motor_drive_right.setPower(0);
@@ -116,5 +110,15 @@ public abstract class GlobalFunctions extends LinearOpMode {
 
     public void driveFor(double seconds) {
         driveFor(seconds, 0.75, 0.75);
+    }
+
+    public void wait(double seconds) {
+        seconds = seconds * 1000;
+
+        instant = runtime.milliseconds();
+        while (instant > runtime.milliseconds() - seconds) {
+            telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
+
+        }
     }
 }

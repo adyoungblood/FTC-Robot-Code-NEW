@@ -38,8 +38,17 @@ public class Autonomous03 extends OpMode {
     boolean bCurrState = false;
     boolean bLedOn = true;
 
-    int previous_error = 0;
-    int integral = 0;
+    double previous_error = 0;
+    double integral = 0;
+    double error = 0;
+    double setpoint = 0;
+    double measured_value = 0;
+    double dt = 0;
+    double derivative = 0;
+    double Kp = 0;
+    double Ki = 0;
+    double Kd = 0;
+    double output = 0;
 
   private enum Config {
     TEST_GAMEPAD1,
@@ -335,9 +344,17 @@ public class Autonomous03 extends OpMode {
           g.driveFor(0.25, -1, 1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && !colorIsRed) {
           g.driveFor(0.25, -1, -1);
+          /*
+          error = setpoint - measured_value;
+          integral = integral + error*dt;
+          derivative = (error - previous_error)/dt;
+          output = Kp*error + Ki*integral + Kd*derivative;
+          previous_error = error;
+          g.wait(dt);
+          g.driveFor(output);
+          */
+          //Implement a PID later when we have a gyro and I know how to do it
       }
-    // can use configured variables here
-
       telemetry.update();
 
   }
