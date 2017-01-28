@@ -15,13 +15,15 @@ Support is available by emailing support@modernroboticsinc.com.
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
+@Disabled
 @TeleOp(name = "Wall_Follow", group = "MRI")
-//@Disabled
+
 public class Wall_Follow extends LinearOpMode {
 
     //Instance of OpticalDistanceSensor

@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 //import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,7 +17,7 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
-
+@Disabled
 @TeleOp(name="TestMode", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
 
 public class TestMode extends OpMode {

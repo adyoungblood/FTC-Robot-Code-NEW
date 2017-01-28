@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode;
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 //import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
-
+@Disabled
 @TeleOp(name="ShooterTest", group="Iterative Opmode")  // @Autonomous(...) is the other common choice
 
 public class ShooterTest extends OpMode {

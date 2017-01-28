@@ -3,6 +3,7 @@
 package org.firstinspires.ftc.teamcode;
 
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -29,6 +30,7 @@ import java.lang.*;
 
 import static java.lang.Thread.sleep;
 
+@Disabled
 @Autonomous(name="Autonomous02", group="Iterative Opmode")  // @TeleOp(...) is the other common choice
 
 public class Autonomous02 extends OpMode {

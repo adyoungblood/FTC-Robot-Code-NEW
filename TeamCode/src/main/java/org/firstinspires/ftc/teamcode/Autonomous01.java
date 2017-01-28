@@ -3,6 +3,7 @@
 package org.firstinspires.ftc.teamcode;
 
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -17,6 +18,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Disabled
 @Autonomous(name="Autonomous01", group="Linear Opmode")  // @TeleOp(...) is the other common choice
 /*
 
