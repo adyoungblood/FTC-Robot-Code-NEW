@@ -63,6 +63,9 @@ public class Autonomous03 extends OpMode {
     boolean bCurrState = false;
     boolean bLedOn = true;
 
+    int previous_error = 0;
+    int integral = 0;
+
   private enum Config {
     TEST_GAMEPAD1,
     TEST_GAMEPAD2,
@@ -350,13 +353,13 @@ public class Autonomous03 extends OpMode {
       */
 
       if (autonType == autonType.GO_FOR_BEACON && colorIsRed) {
-          myGlog.driveFor(1, 1);
+          myGlog.driveFor(0.25, 1, 1);
       } else if (autonType == autonType.GO_FOR_BEACON && !colorIsRed) {
-          myGlog.driveFor(-1, 1);
+          myGlog.driveFor(0.25, 1, -1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && colorIsRed) {
-          myGlog.driveFor(1, -1);
+          myGlog.driveFor(0.25, -1, 1);
       } else if (autonType == autonType.GO_FOR_MOUNTAIN && !colorIsRed) {
-          myGlog.driveFor(-1, -1);
+          myGlog.driveFor(0.25, -1, -1);
       }
     // can use configured variables here
 

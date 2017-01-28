@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import android.content.Context;
 import android.media.SoundPool;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -16,7 +18,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 
-public class GlobalFunctions{
+public abstract class GlobalFunctions extends LinearOpMode {
     Context mContext;
 
     // constructor
@@ -84,7 +86,7 @@ public class GlobalFunctions{
 
     double instant;
 
-    public void driveFor(int seconds, double left_power, double right_power) {
+    public void driveFor(double seconds, double left_power, double right_power) {
         motor_drive_right.setPower(right_power);
         motor_drive_left.setPower(left_power);
 
@@ -94,17 +96,18 @@ public class GlobalFunctions{
         instant = runtime.milliseconds();
         while (instant > runtime.milliseconds() - seconds) {
             telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
+
         }
 
         motor_drive_left.setPower(0);
         motor_drive_right.setPower(0);
     }
 
-    public void driveFor(int seconds, double power) {
+    public void driveFor(double seconds, double power) {
         driveFor(seconds, power, power);
     }
 
-    public void driveFor(int seconds) {
+    public void driveFor(double seconds) {
         driveFor(seconds, 0.75, 0.75);
     }
 }

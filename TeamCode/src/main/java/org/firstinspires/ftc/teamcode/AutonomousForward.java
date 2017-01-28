@@ -39,15 +39,6 @@ public class AutonomousForward extends LinearOpMode {
                 //1 second is about 50 inches @ 75% power
                 myGlog.driveFor(2);
 
-            /*
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            motor_drive_left.setPower(0);
-            motor_drive_right.setPower(0);
-            */
                 x++;
             } else {
                 telemetry.addData("Status", "Autonomous done");
