@@ -16,7 +16,6 @@ public class AutonomousForward extends LinearOpMode {
 
     GlobalFunctions g;
 
-    double instant;
     int x = 0;
 
     @Override

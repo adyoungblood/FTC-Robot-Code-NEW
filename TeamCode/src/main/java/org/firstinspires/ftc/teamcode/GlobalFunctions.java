@@ -1,24 +1,24 @@
 package org.firstinspires.ftc.teamcode;
 
 import android.content.Context;
-import android.media.SoundPool;
+//import android.media.SoundPool;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
+//import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+//import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.Servo;
+//import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
+//import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+//import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import java.math.*;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.view.View;
+//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+//import com.qualcomm.robotcore.hardware.DcMotorSimple;
+//import java.math.*;
+//import android.app.Activity;
+//import android.content.Context;
+//import android.graphics.Color;
+//import android.view.View;
 
 public abstract class GlobalFunctions extends LinearOpMode {
     Context mContext;
@@ -29,67 +29,64 @@ public abstract class GlobalFunctions extends LinearOpMode {
     }
 
     public ElapsedTime runtime = new ElapsedTime();
-    public DcMotorController motor_controller_drive;
+    public DcMotorController motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
-    public DcMotorController motor_controller_shooter;
-    public DcMotor shooter_motor_1;
-    public DcMotor intake_motor_1;
-    public DcMotor intake_motor_2;
-    public Servo buttonServo;
+    //public DcMotorController motor_controller_shooter;
+    //public DcMotor shooter_motor_1;
+    //public DcMotor intake_motor_1;
+    //public DcMotor intake_motor_2;
+    //public Servo buttonServo;
     public DcMotorController motor_controller_other;
-    public DcMotor andymarkneverest40;
+    public DcMotor motor_hat;
 
     // Initilization of drive train variables:
     //public double power_forward;
-    public double power_back;
+    //public double power_back;
     //    public double power_RT;
 //    public double power_LT;
-    public double power_level;
+    //public double power_level;
 
     // Initilization of drive train variables:
     //public double power_forward;
-    public double power_shooter;
+    //public double power_shooter;
 
     // Initialization of joystick buttons:
-    public double button_RT;
-    public double button_LT;
+    //public double button_RT;
+    //public double button_LT;
 
-    public boolean button_RB;
-    public boolean button_LB;
+    //public boolean button_RB;
+    //public boolean button_LB;
 /*    public boolean button_a;
     public boolean button_y;
     public boolean button_b;
     public boolean button_x;*/
 
     //    public double joystick1_right_x;
-    public double joystick1_right_y;
-    public double joystick1_left_x;
-    public double joystick1_left_y;
-    public double joystick1_right_x;
-    public double joystick2_right_y;
+    //public double joystick1_right_y;
+    //public double joystick1_left_x;
+    //public double joystick1_left_y;
+    //public double joystick1_right_x;
+    //public double joystick2_right_y;
 
-    public double ARM_RETRACTED_POSITION = 0.2;
-    public double ARM_EXTENDED_POSITION = 0.8;
+    //public double ARM_RETRACTED_POSITION = 0.2;
+    //public double ARM_EXTENDED_POSITION = 0.8;
 
-    public double left_train_power;
-    public double right_train_power;
+    //public double left_train_power;
+    //public double right_train_power;
 
     public boolean startButton;
     public boolean startPrev;
     public boolean speed;
 
-    // private DcMotor leftMotor = null;
-    // private DcMotor rightMotor = null;
-
-    public SoundPool mySound;
-    public int beepID;
+    //public SoundPool mySound;
+    //public int beepID;
 
     double left_trigger;
     double right_trigger;
 
-    ColorSensor sensorRGB;
-    DeviceInterfaceModule cdim;
+    //ColorSensor sensorRGB;
+    //DeviceInterfaceModule cdim;
 
     double instant;
 
@@ -118,7 +115,25 @@ public abstract class GlobalFunctions extends LinearOpMode {
         instant = runtime.milliseconds();
         while (instant > runtime.milliseconds() - seconds) {
             telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
-
         }
     }
+    //Drives for a random power, and for a random time.
+    //Directional input is accepted, but it defaults to forwards
+
+    /*
+    public void driveRandomAF(String direction) {
+        if (direction == "forward") {
+            driveFor(Math.random(), Math.random(), Math.random() * 2);
+        } else if (direction == "left") {
+            driveFor(-Math.random(), Math.random(), Math.random() * 2);
+        } else if (direction == "right") {
+            driveFor(Math.random(), -Math.random(), Math.random() * 2);
+        } else if (direction == "backward") {
+            driveFor(-Math.random(), -Math.random(), Math.random() * 2);
+        } else {
+            driveFor(Math.random(), Math.random(), Math.random() * 2);
+        }
+    }
+    */
+
 }

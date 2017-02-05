@@ -58,8 +58,8 @@ public class Autonomous03 extends OpMode {
     AUTON_TYPE,
     READY;
     private static Config[] vals = values();
-    public Config next() { return vals[(this.ordinal()+1) % vals.length];}
-    public Config prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
+    public Config next() { return vals[(this.ordinal() + 1) % vals.length];}
+    public Config prev() { return vals[(this.ordinal() - 1 + vals.length) % vals.length];}
   }
 
   private enum AutonType {
@@ -92,8 +92,8 @@ public class Autonomous03 extends OpMode {
       //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
       g.motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
       //motor_controller_intake = hardwareMap.dcMotorController.get("Motor_Controller_Intake");
-      g.motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
-      g.andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
+      //g.motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
+      //g.andymarkneverest40 = hardwareMap.dcMotor.get("andymarkneverest40");
       //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
       //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
       g.motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
