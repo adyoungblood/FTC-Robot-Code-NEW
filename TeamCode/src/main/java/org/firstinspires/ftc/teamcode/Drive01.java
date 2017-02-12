@@ -69,14 +69,14 @@ public class Drive01 extends OpMode {
         telemetry.addData("Status", "Initialized");
 
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
-        motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
+        //motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
         //motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         //shooter_motor_1 = hardwareMap.dcMotor.get("Motor_Shooter_1");
         //intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
         //intake_motor_2 = hardwareMap.dcMotor.get("Motor_Intake_2");
         motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
-        hatSpinner = hardwareMap.dcMotor.get("Motor_Hat");
+        //hatSpinner = hardwareMap.dcMotor.get("Motor_Hat");
     }
 
     /*
@@ -103,7 +103,7 @@ public class Drive01 extends OpMode {
     public void loop() {
 
         drive_control();
-        hat_control();
+        //hat_control();
         //shooter_control();
         //intake_control();
 
@@ -117,6 +117,7 @@ public class Drive01 extends OpMode {
     public void stop() {
     }
 
+    /*
     public void hat_control() {
         if (gamepad1.dpad_left) {
             hatSpinner.setPower(1);
@@ -126,6 +127,7 @@ public class Drive01 extends OpMode {
             hatSpinner.setPower(0);
         }
     }
+    */
 
     /*
     public void shooter_control() {

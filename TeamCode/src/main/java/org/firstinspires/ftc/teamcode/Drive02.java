@@ -28,10 +28,13 @@ class Drive02 extends OpMode {
         // Initialize drive motors
         g.motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
         g.motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
-        g.motor_hat = hardwareMap.dcMotor.get("Hat_Motor");
+        g.shooter_motor_1 = hardwareMap.dcMotor.get("Shooter_Motor_1");
+        g.shooter_motor_2 = hardwareMap.dcMotor.get("Shooter_Motor_2");
+        //g.motor_hat = hardwareMap.dcMotor.get("Hat_Motor");
 
         g.motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
-        g.motor_controller_other = hardwareMap.dcMotorController.get("Other_Controller");
+        g.motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
+        g.motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
         //
 //        buttonServo = hardwareMap.servo.get("buttonServo");
@@ -39,6 +42,8 @@ class Drive02 extends OpMode {
         // opposite directions. So reverse one
         g.motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
         g.motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
+        g.shooter_motor_1.setDirection(DcMotorSimple.Direction.FORWARD);
+        g.shooter_motor_2.setDirection(DcMotorSimple.Direction.REVERSE);
         //Declare positions of buttonServo //
 
         gamepad1.setJoystickDeadzone((float)0.2);
@@ -62,6 +67,9 @@ class Drive02 extends OpMode {
         g.startButton = gamepad1.start;
         g.left_trigger = -gamepad1.left_stick_y;
         g.right_trigger = -gamepad1.right_stick_y;
+        g.button_b = gamepad1.b;
+        g.button_LB = gamepad1.left_bumper;
+        g.button_RB = gamepad1.right_bumper;
 
         if (g.startButton && !g.startPrev) {
             g.speed = true;
@@ -122,16 +130,26 @@ class Drive02 extends OpMode {
             telemetry.addData("Speed", "Fast");
         }
 
-        if (gamepad1.dpad_left) {
-            g.motor_hat.setPower(1);
+        if (g.button_b) {
+            g.shooter_motor_1.setPower(0.5);
+            g.shooter_motor_2.setPower(0.5);
         } else {
-            g.motor_hat.setPower(0);
+            g.shooter_motor_1.setPower(0);
+            g.shooter_motor_2.setPower(0);
+        }
+
+        if (g.button_LB) {
+            g.intake_motor.setPower(1);
+        }
+
+        if (g.button_RB) {
+            g.belt_motor.setPower(1);
         }
 
         telemetry.addData("Speed:", g.speed);
         telemetry.addData("Start Button:", g.startButton);
         telemetry.addData("Start Button Previous", g.startPrev);
-        telemetry.addData("Left DPad:", gamepad1.dpad_left);
+        //telemetry.addData("Left DPad:", gamepad1.dpad_left);
         telemetry.addData("Left Trigger", g.left_trigger);
         telemetry.addData("Right Trigger", g.right_trigger);
 

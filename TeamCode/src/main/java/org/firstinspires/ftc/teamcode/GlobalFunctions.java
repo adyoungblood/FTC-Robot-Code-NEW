@@ -32,10 +32,11 @@ public abstract class GlobalFunctions extends LinearOpMode {
     public DcMotorController motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
     public DcMotor motor_drive_left;
     public DcMotor motor_drive_right;
-    //public DcMotorController motor_controller_shooter;
-    //public DcMotor shooter_motor_1;
-    //public DcMotor intake_motor_1;
-    //public DcMotor intake_motor_2;
+    public DcMotorController motor_controller_shooter;
+    public DcMotor shooter_motor_1;
+    public DcMotor shooter_motor_2;
+    public DcMotor intake_motor;
+    public DcMotor belt_motor;
     //public Servo buttonServo;
     public DcMotorController motor_controller_other;
     public DcMotor motor_hat;
@@ -55,12 +56,12 @@ public abstract class GlobalFunctions extends LinearOpMode {
     //public double button_RT;
     //public double button_LT;
 
-    //public boolean button_RB;
-    //public boolean button_LB;
-/*    public boolean button_a;
-    public boolean button_y;
+    public boolean button_RB;
+    public boolean button_LB;
+    //public boolean button_a;
+    //public boolean button_y;
     public boolean button_b;
-    public boolean button_x;*/
+    //public boolean button_x;
 
     //    public double joystick1_right_x;
     //public double joystick1_right_y;
