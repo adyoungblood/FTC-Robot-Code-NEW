@@ -140,10 +140,14 @@ class Drive02 extends OpMode {
 
         if (g.button_LB) {
             g.intake_motor.setPower(1);
+        } else {
+            g.intake_motor.setPower(0);
         }
 
         if (g.button_RB) {
             g.belt_motor.setPower(1);
+        } else {
+            g.belt_motor.setPower(0);
         }
 
         telemetry.addData("Speed:", g.speed);

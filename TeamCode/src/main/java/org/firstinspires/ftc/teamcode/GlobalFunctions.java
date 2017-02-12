@@ -15,10 +15,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 //import com.qualcomm.robotcore.hardware.DcMotorSimple;
 //import java.math.*;
-//import android.app.Activity;
-//import android.content.Context;
-//import android.graphics.Color;
-//import android.view.View;
 
 public abstract class GlobalFunctions extends LinearOpMode {
     Context mContext;
