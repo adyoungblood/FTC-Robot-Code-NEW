@@ -9,7 +9,9 @@ public class Autonomous04Blue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        g.driveFor(1);
+        //TODO This is supposed to be the new Autonomous with shooting and cool stuff
+        //TODO I need measurements but I should do it now anyway but again I'm lazy xD
+        g.driveFor(0.5, 1);
 
 
     }
