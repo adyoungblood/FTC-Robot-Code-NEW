@@ -26,8 +26,8 @@ class Drive02 extends OpMode {
         telemetry.clear();
         telemetry.addData("Status", "Initialized");
         // Initialize drive motors
-        g.motor_drive_left = hardwareMap.dcMotor.get("Left_Motor");
-        g.motor_drive_right = hardwareMap.dcMotor.get("Right_Motor");
+        g.motor_drive_left = hardwareMap.dcMotor.get("Motor_Drive_Left");
+        g.motor_drive_right = hardwareMap.dcMotor.get("Motor_Drive_Right");
         g.shooter_motor_1 = hardwareMap.dcMotor.get("Shooter_Motor_1");
         g.shooter_motor_2 = hardwareMap.dcMotor.get("Shooter_Motor_2");
         //g.motor_hat = hardwareMap.dcMotor.get("Hat_Motor");
@@ -37,7 +37,7 @@ class Drive02 extends OpMode {
         g.motor_controller_other = hardwareMap.dcMotorController.get("Motor_Controller_Other");
         //capperMotor = hardwareMap.dcMotor.get("capperMotor")
         //
-//        buttonServo = hardwareMap.servo.get("buttonServo");
+        //buttonServo = hardwareMap.servo.get("buttonServo");
         // If drive motors are given full power, robot would spin because of the motors being in
         // opposite directions. So reverse one
         g.motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);

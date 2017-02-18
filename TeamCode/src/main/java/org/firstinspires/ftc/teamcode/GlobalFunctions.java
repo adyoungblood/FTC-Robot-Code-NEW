@@ -35,7 +35,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
     public DcMotor belt_motor;
     //public Servo buttonServo;
     public DcMotorController motor_controller_other;
-    public DcMotor motor_hat;
+    //public DcMotor motor_hat;
 
     // Initilization of drive train variables:
     //public double power_forward;
@@ -59,7 +59,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
     public boolean button_b;
     //public boolean button_x;
 
-    //    public double joystick1_right_x;
+    //public double joystick1_right_x;
     //public double joystick1_right_y;
     //public double joystick1_left_x;
     //public double joystick1_left_y;
