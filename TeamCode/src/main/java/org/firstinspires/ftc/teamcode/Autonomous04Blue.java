@@ -62,7 +62,7 @@ public class Autonomous04Blue extends LinearOpMode {
         shoot(0.47, 0.3, -0.03);
         driveFor(0.5, -0.4, -0.4);
         driveFor(2.4, 0.4, -0.4);
-        driveFor(2, 0.4, 0.8);
+        driveFor(2, 0.8, 0.4);
     }
 
     public void driveFor(double seconds, double left_power, double right_power) {
