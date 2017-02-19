@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.util.concurrent.TimeUnit;
+
 @TeleOp(name = "Drive02_Sylvana", group = "Iterative Opmode")
 public class Drive02_Sylvana extends OpMode {
 
@@ -163,13 +165,10 @@ public class Drive02_Sylvana extends OpMode {
             shooter_motor_2.setPower(0);
         }
 
-        /*
+
         if (button_y) {
-            shoot(0.225, 0.3, 0.1);
-        } else {
-            intake_servo.setPosition(0);
+            shoot(0.47, 0.3, -0.03);
         }
-        */
     }
 
     public void servo_control() {
@@ -210,14 +209,15 @@ public class Drive02_Sylvana extends OpMode {
         }
     }
 
-/*
-    public void waitFor(double seconds) {
-            seconds = seconds * 1000;
 
-            instant = runtime.milliseconds();
-            while (instant > runtime.milliseconds() - seconds) {
-                telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
-            }
+    public void waitFor(double seconds) {
+        motor_drive_left.setPower(0);
+        motor_drive_right.setPower(0);
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -239,5 +239,4 @@ public class Drive02_Sylvana extends OpMode {
         shooter_motor_2.setPower(0);
         belt_motor.setPower(0);
     }
-    */
 }

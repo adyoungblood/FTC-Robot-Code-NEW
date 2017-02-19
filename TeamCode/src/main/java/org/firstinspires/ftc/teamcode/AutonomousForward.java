@@ -28,20 +28,17 @@ public class AutonomousForward extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            if (x == 0) {
+
 
                 //1 second is about 50 inches @ 75% power
                 g.driveFor(2);
 
-                x++;
-            } else {
                 telemetry.addData("Status", "Autonomous done");
                 requestOpModeStop();
                 resetStartTime();
                 stop();
                 gamepad1.reset();
                 gamepad2.reset();
-            }
         }
     }
 }

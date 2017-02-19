@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
 import java.math.*;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -208,11 +209,30 @@ public class Drive02_Victor extends OpMode {
 
 
     public void waitFor(double seconds) {
-            seconds = seconds * 1000;
-
-            instant = runtime.milliseconds();
-            while (instant > runtime.milliseconds() - seconds) {
-                telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
-            }
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
+
+    public void shoot(double shoot_power, double belt_power, double acceleration) {
+        intake_servo.setPosition(0);
+        shooter_motor_1.setPower(shoot_power);
+        shooter_motor_2.setPower(shoot_power);
+        waitFor(2);
+        belt_motor.setPower(belt_power);
+        waitFor(0.5);
+        intake_servo.setPosition(0.05);
+        waitFor(1);
+        shooter_motor_1.setPower(shoot_power + acceleration);
+        shooter_motor_2.setPower(shoot_power + acceleration);
+        waitFor(1);
+        intake_servo.setPosition(0);
+        shooter_motor_1.setPower(0);
+        shooter_motor_2.setPower(0);
+        belt_motor.setPower(0);
+    }
+
 }
