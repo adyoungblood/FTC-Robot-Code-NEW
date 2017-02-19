@@ -67,7 +67,7 @@ public class Autonomous_OnlyShoot extends LinearOpMode {
 
         waitForStart();
 
-        shoot(0.47, 0.3, -0.03);
+            shoot(0.47, 0.3, -0.03);
     }
 
     public void driveFor(double seconds, double left_power, double right_power) {
@@ -98,16 +98,30 @@ public class Autonomous_OnlyShoot extends LinearOpMode {
 
     }
 
+    public void shootVictor(double shoot_power, double belt_power) {
+        intake_servo.setPosition(0.05);
+        shooter_motor_1.setPower(shoot_power);
+        shooter_motor_2.setPower(shoot_power);
+        waitFor(2);
+        belt_motor.setPower(belt_power);
+        waitFor(0.5);
+        belt_motor.setPower(0);
+        waitFor(2.5);
+        belt_motor.setPower(belt_power);
+        waitFor(1);
+        belt_motor.setPower(0);
+        shooter_motor_1.setPower(0);
+        shooter_motor_2.setPower(0);
+    }
+
     public void shoot(double shoot_power, double belt_power, double acceleration) {
         intake_servo.setPosition(0);
         shooter_motor_1.setPower(shoot_power);
         shooter_motor_2.setPower(shoot_power);
-        intake_motor.setPower(1);
         waitFor(2);
         belt_motor.setPower(belt_power);
         waitFor(0.5);
         intake_servo.setPosition(0.05);
-        intake_motor.setPower(0);
         waitFor(1);
         shooter_motor_1.setPower(shoot_power + acceleration);
         shooter_motor_2.setPower(shoot_power + acceleration);

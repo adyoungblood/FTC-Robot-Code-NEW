@@ -44,6 +44,7 @@ public class Drive02_Victor extends OpMode {
     public boolean button_y;
     public boolean button_LB;
     public boolean button_RB;
+    public double right_trigger;
 
     double instant;
 
@@ -166,11 +167,15 @@ public class Drive02_Victor extends OpMode {
 
     public void intake_control() {
 
+        right_trigger = gamepad2.left_trigger;
         button_RB = gamepad2.right_bumper;
 
         if (button_RB) {
             intake_motor.setPower(1);
             belt_motor.setPower(0.3);
+        } else if (right_trigger > 0) {
+            intake_motor.setPower(-1);
+            belt_motor.setPower(-0.3);
         } else {
             intake_motor.setPower(0);
             belt_motor.setPower(0);
@@ -188,14 +193,6 @@ public class Drive02_Victor extends OpMode {
             shooter_motor_1.setPower(0);
             shooter_motor_2.setPower(0);
         }
-
-        /*
-        if (button_y) {
-            shoot(0.225, 0.3, 0.1);
-        } else {
-            intake_servo.setPosition(0);
-        }
-        */
     }
 
     public void servo_control() {
@@ -209,7 +206,7 @@ public class Drive02_Victor extends OpMode {
         }
     }
 
-/*
+
     public void waitFor(double seconds) {
             seconds = seconds * 1000;
 
@@ -218,25 +215,4 @@ public class Drive02_Victor extends OpMode {
                 telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
             }
     }
-
-
-
-    public void shoot(double shoot_power, double belt_power, double acceleration) {
-        intake_servo.setPosition(0);
-        shooter_motor_1.setPower(shoot_power);
-        shooter_motor_2.setPower(shoot_power);
-        waitFor(2);
-        belt_motor.setPower(belt_power);
-        waitFor(0.5);
-        intake_servo.setPosition(0.05);
-        waitFor(1);
-        shooter_motor_1.setPower(shoot_power + acceleration);
-        shooter_motor_2.setPower(shoot_power + acceleration);
-        waitFor(1);
-        intake_servo.setPosition(0);
-        shooter_motor_1.setPower(0);
-        shooter_motor_2.setPower(0);
-        belt_motor.setPower(0);
-    }
-    */
 }

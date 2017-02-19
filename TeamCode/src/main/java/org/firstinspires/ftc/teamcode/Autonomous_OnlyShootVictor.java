@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.concurrent.TimeUnit;
 
 @Autonomous
-public class Autonomous_CurveRight extends LinearOpMode {
+public class Autonomous_OnlyShootVictor extends LinearOpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
@@ -32,9 +32,6 @@ public class Autonomous_CurveRight extends LinearOpMode {
         @Override
     public void runOpMode() throws InterruptedException {
 
-        telemetry.clear();
-        telemetry.addData("Status", "Initialized");
-        // Initialize drive motors
         motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         motor_controller_belt = hardwareMap.dcMotorController.get("Motor_Controller_Belt");
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
@@ -70,10 +67,7 @@ public class Autonomous_CurveRight extends LinearOpMode {
 
         waitForStart();
 
-            shoot(0.47, 0.3, -0.07);
-        driveFor(0.5, -0.4, -0.4);
-        driveFor(2.4, 0.4, -0.4);
-        driveFor(2, 0.8, 0.3);
+        shootVictor(0.47, 0.3);
     }
 
     public void driveFor(double seconds, double left_power, double right_power) {
@@ -104,16 +98,30 @@ public class Autonomous_CurveRight extends LinearOpMode {
 
     }
 
+    public void shootVictor(double shoot_power, double belt_power) {
+        intake_servo.setPosition(0.05);
+        shooter_motor_1.setPower(shoot_power);
+        shooter_motor_2.setPower(shoot_power);
+        waitFor(2);
+        belt_motor.setPower(belt_power);
+        waitFor(1);
+        belt_motor.setPower(0);
+        waitFor(3);
+        belt_motor.setPower(belt_power);
+        waitFor(1);
+        belt_motor.setPower(0);
+        shooter_motor_1.setPower(0);
+        shooter_motor_2.setPower(0);
+    }
+
     public void shoot(double shoot_power, double belt_power, double acceleration) {
         intake_servo.setPosition(0);
         shooter_motor_1.setPower(shoot_power);
         shooter_motor_2.setPower(shoot_power);
-        intake_motor.setPower(1);
         waitFor(2);
         belt_motor.setPower(belt_power);
         waitFor(0.5);
         intake_servo.setPosition(0.05);
-        intake_motor.setPower(0);
         waitFor(1);
         shooter_motor_1.setPower(shoot_power + acceleration);
         shooter_motor_2.setPower(shoot_power + acceleration);

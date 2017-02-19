@@ -67,8 +67,7 @@ public class Autonomous_CurveLeft extends LinearOpMode {
 
         waitForStart();
 
-        shoot(0.47, 0.3, -0.03);
-//        intake_servo.setPosition(0);
+            shoot(0.47, 0.3, -0.1);
         driveFor(0.5, -0.4, -0.4);
         driveFor(2.4, 0.4, -0.4);
         driveFor(2, 0.4, 0.8);
