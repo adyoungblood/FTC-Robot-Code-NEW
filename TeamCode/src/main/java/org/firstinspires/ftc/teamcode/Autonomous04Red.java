@@ -4,12 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class Autonomous04Blue extends LinearOpMode {
+public class Autonomous04Red extends LinearOpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
@@ -49,26 +50,27 @@ public class Autonomous04Blue extends LinearOpMode {
         motor_drive_left = hardwareMap.dcMotor.get("Motor_Drive_Left");
 
         shooter_motor_1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        shooter_motor_1.setDirection(DcMotor.Direction.REVERSE);
         shooter_motor_2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor_drive_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motor_drive_right.setDirection(DcMotor.Direction.REVERSE);
         motor_drive_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         belt_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intake_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //TODO This is supposed to be the new Autonomous with shooting and cool stuff
-        //TODO I need measurements but I should do it now anyway but again I'm lazy xD
-        //driveFor(0.5, 1);
-        shoot();
-
-
+        shoot(0.22, 0.3, 0.1);
+        intake_servo.setPosition(0);
+        driveFor(0.25, -1, -1);
+        driveFor(0.75, 1, -1);
+        driveFor(1.5, 0.45, 1);
     }
 
     public void driveFor(double seconds, double left_power, double right_power) {
         motor_drive_right.setPower(right_power);
         motor_drive_left.setPower(left_power);
 
-        //1 second = 50 inches
+        //1 second = 50 inches for driveFor
         waitFor(seconds);
 
         motor_drive_left.setPower(0);
@@ -92,15 +94,18 @@ public class Autonomous04Blue extends LinearOpMode {
         }
     }
 
-    public void shoot() {
+    public void shoot(double shoot_power, double belt_power, double acceleration) {
         intake_servo.setPosition(0);
-        shooter_motor_1.setPower(0.3);
-        shooter_motor_2.setPower(0.3);
+        shooter_motor_1.setPower(shoot_power);
+        shooter_motor_2.setPower(shoot_power);
         waitFor(2);
-        belt_motor.setPower(1);
+        belt_motor.setPower(belt_power);
         waitFor(0.5);
         intake_servo.setPosition(0.05);
-        waitFor(2);
+        waitFor(1);
+        shooter_motor_1.setPower(shoot_power + acceleration);
+        shooter_motor_2.setPower(shoot_power + acceleration);
+        waitFor(1);
         intake_servo.setPosition(0);
         shooter_motor_1.setPower(0);
         shooter_motor_2.setPower(0);

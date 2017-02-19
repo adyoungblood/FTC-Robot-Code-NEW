@@ -41,8 +41,6 @@ class Drive02 extends OpMode {
     public boolean speed;
     public boolean startPrev;
     public boolean startButton;
-    public boolean buttonRBPrev;
-    public boolean buttonLBPrev;
 
     public boolean button_b;
     public boolean button_y;
@@ -93,8 +91,7 @@ class Drive02 extends OpMode {
 
         belt_motor.setDirection(DcMotorSimple.Direction.FORWARD);
         intake_motor.setDirection(DcMotorSimple.Direction.FORWARD);
-        shooter_motor_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooter_motor_2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter_motor_1.setDirection(DcMotor.Direction.REVERSE);
         power_motor_drive_right = 0;
         power_motor_drive_left = 0;
         intake_servo.setPosition(0);
@@ -108,9 +105,6 @@ class Drive02 extends OpMode {
 
         speed = false;
         startPrev = false;
-
-        buttonRBPrev = false;
-        buttonLBPrev = false;
     }
 
     @Override
@@ -121,15 +115,13 @@ class Drive02 extends OpMode {
         drive_control();
         shooter_control();
         intake_control();
+        servo_control();
 
         telemetry.addData("Speed:", speed);
         telemetry.addData("Start Button:", startButton);
         telemetry.addData("Start Button Previous", startPrev);
-        //telemetry.addData("Left DPad:", gamepad1.dpad_left);
         telemetry.addData("Left Trigger", power_motor_drive_left);
         telemetry.addData("Right Trigger", power_motor_drive_right);
-
-        startPrev = startButton;
     }
 
     public void drive_control() {
@@ -170,17 +162,17 @@ class Drive02 extends OpMode {
 
         motor_drive_left.setPower(power_motor_drive_left);
         motor_drive_right.setPower(power_motor_drive_right);
+
+        startPrev = startButton;
     }
 
     public void intake_control() {
 
-        button_LB = gamepad2.left_bumper;
         button_RB = gamepad2.right_bumper;
 
-        if (button_RB && !buttonRBPrev) {
+        if (button_RB) {
             intake_motor.setPower(1);
-            belt_motor.setPower(1);
-            buttonRBPrev = button_RB;
+            belt_motor.setPower(0.3);
         } else {
             intake_motor.setPower(0);
             belt_motor.setPower(0);
@@ -189,37 +181,37 @@ class Drive02 extends OpMode {
 
     public void shooter_control() {
 
-        button_b = gamepad2.b;
+        button_LB = gamepad2.left_bumper;
+
+        if (button_LB) {
+            shooter_motor_1.setPower(0.225);
+            shooter_motor_2.setPower(0.225);
+        } else {
+            shooter_motor_1.setPower(0);
+            shooter_motor_2.setPower(0);
+        }
+
+        /*
+        if (button_y) {
+            shoot(0.225, 0.3, 0.1);
+        } else {
+            intake_servo.setPosition(0);
+        }
+        */
+    }
+
+    public void servo_control() {
+
         button_y = gamepad2.y;
 
         if (button_y) {
-            intake_servo.setPosition(0);
-            shooter_motor_1.setPower(0.3);
-            shooter_motor_2.setPower(0.3);
-            waitFor(2);
-            belt_motor.setPower(1);
-            waitFor(0.5);
             intake_servo.setPosition(0.05);
-            waitFor(2);
-            intake_servo.setPosition(0);
-            shooter_motor_1.setPower(0);
-            shooter_motor_2.setPower(0);
-            belt_motor.setPower(0);
         } else {
             intake_servo.setPosition(0);
-        }
-
-        if (button_LB && !buttonLBPrev) {
-            shooter_motor_1.setPower(0.3);
-            shooter_motor_2.setPower(0.3);
-            buttonLBPrev = button_LB;
-        } else {
-            shooter_motor_1.setPower(0);
-            shooter_motor_2.setPower(0);
         }
     }
 
-
+/*
     public void waitFor(double seconds) {
             seconds = seconds * 1000;
 
@@ -230,15 +222,23 @@ class Drive02 extends OpMode {
     }
 
 
-    /*
-    public void waitFor(double seconds) {
-        try {
-            TimeUnit.MILLISECONDS.sleep((long) (seconds * 1000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
 
-        }
+    public void shoot(double shoot_power, double belt_power, double acceleration) {
+        intake_servo.setPosition(0);
+        shooter_motor_1.setPower(shoot_power);
+        shooter_motor_2.setPower(shoot_power);
+        waitFor(2);
+        belt_motor.setPower(belt_power);
+        waitFor(0.5);
+        intake_servo.setPosition(0.05);
+        waitFor(1);
+        shooter_motor_1.setPower(shoot_power + acceleration);
+        shooter_motor_2.setPower(shoot_power + acceleration);
+        waitFor(1);
+        intake_servo.setPosition(0);
+        shooter_motor_1.setPower(0);
+        shooter_motor_2.setPower(0);
+        belt_motor.setPower(0);
     }
     */
-
 }
