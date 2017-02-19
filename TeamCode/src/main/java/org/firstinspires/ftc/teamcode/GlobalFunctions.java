@@ -92,7 +92,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
         motor_drive_left.setPower(left_power);
 
         //1 second = 50 inches
-        wait(seconds);
+        waitFor(seconds);
 
         motor_drive_left.setPower(0);
         motor_drive_right.setPower(0);
@@ -106,7 +106,7 @@ public abstract class GlobalFunctions extends LinearOpMode {
         driveFor(seconds, 0.75, 0.75);
     }
 
-    public void wait(double seconds) {
+    public void waitFor(double seconds) {
         seconds = seconds * 1000;
 
         instant = runtime.milliseconds();
