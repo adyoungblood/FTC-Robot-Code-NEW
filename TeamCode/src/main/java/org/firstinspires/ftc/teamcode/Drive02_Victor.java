@@ -25,7 +25,6 @@ public class Drive02_Victor extends OpMode {
     public DcMotorController motor_controller_shooter;
     public DcMotor shooter_motor_1;
     public DcMotor shooter_motor_2;
-    //public DcMotor intake_motor_1;
     public DcMotorController motor_controller_belt;
     public DcMotor belt_motor;
     public DcMotor intake_motor;
@@ -42,7 +41,6 @@ public class Drive02_Victor extends OpMode {
     public boolean startPrev;
     public boolean startButton;
 
-    public boolean button_b;
     public boolean button_y;
     public boolean button_LB;
     public boolean button_RB;

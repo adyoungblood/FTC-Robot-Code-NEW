@@ -16,7 +16,6 @@ public class Drive02_Sylvana extends OpMode {
     public DcMotorController motor_controller_shooter;
     public DcMotor shooter_motor_1;
     public DcMotor shooter_motor_2;
-    //public DcMotor intake_motor_1;
     public DcMotorController motor_controller_belt;
     public DcMotor belt_motor;
     public DcMotor intake_motor;
@@ -28,10 +27,6 @@ public class Drive02_Sylvana extends OpMode {
 
     public double power_motor_drive_right;
     public double power_motor_drive_left;
-
-    public boolean speed;
-    public boolean startPrev;
-    public boolean startButton;
 
     public boolean button_b;
     public boolean button_y;
@@ -68,7 +63,6 @@ public class Drive02_Sylvana extends OpMode {
         belt_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         intake_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//        intake_motor_1 = hardwareMap.dcMotor.get("Motor_Intake_1");
         gamepad1.setJoystickDeadzone((float) 0.1);
         shooter_motor_1.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter_motor_2.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -95,9 +89,6 @@ public class Drive02_Sylvana extends OpMode {
         beepID = mySound.load(hardwareMap.appContext, R.raw.startupsoundxp, 1);
         mySound.play(beepID,1,1,1,0,1);
         */
-
-        speed = false;
-        startPrev = false;
     }
 
     @Override
