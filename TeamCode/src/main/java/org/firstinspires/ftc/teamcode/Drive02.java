@@ -118,14 +118,6 @@ class Drive02 extends OpMode {
         telemetry.clear();
         telemetry.addData("Status", "In Loop");
 
-        startButton = gamepad1.start;
-        power_motor_drive_left = -gamepad1.left_stick_y;
-        power_motor_drive_right = -gamepad1.right_stick_y;
-        button_b = gamepad2.b;
-        button_y = gamepad2.y;
-        button_LB = gamepad2.left_bumper;
-        button_RB = gamepad2.right_bumper;
-
         drive_control();
         shooter_control();
         intake_control();
@@ -138,19 +130,19 @@ class Drive02 extends OpMode {
         telemetry.addData("Right Trigger", power_motor_drive_right);
 
         startPrev = startButton;
-
-        motor_drive_left.setPower(power_motor_drive_left);
-        motor_drive_right.setPower(power_motor_drive_right);
     }
 
     public void drive_control() {
+
+        power_motor_drive_left = gamepad1.left_stick_y;
+        power_motor_drive_right = gamepad1.right_stick_y;
+        startButton = gamepad1.start;
+
         if (startButton && !startPrev) {
             speed = true;
         } else {
             speed = false;
         }
-
-
 
         if (Math.pow(power_motor_drive_left, 3) > 0) {
             power_motor_drive_left = Math.max(Math.pow(power_motor_drive_left, 3), 0.7);
@@ -175,9 +167,16 @@ class Drive02 extends OpMode {
         } else {
             telemetry.addData("Speed", "Fast");
         }
+
+        motor_drive_left.setPower(power_motor_drive_left);
+        motor_drive_right.setPower(power_motor_drive_right);
     }
 
     public void intake_control() {
+
+        button_LB = gamepad2.left_bumper;
+        button_RB = gamepad2.right_bumper;
+
         if (button_RB && !buttonRBPrev) {
             intake_motor.setPower(1);
             belt_motor.setPower(1);
@@ -189,6 +188,10 @@ class Drive02 extends OpMode {
     }
 
     public void shooter_control() {
+
+        button_b = gamepad2.b;
+        button_y = gamepad2.y;
+
         if (button_y) {
             intake_servo.setPosition(0);
             shooter_motor_1.setPower(1);
