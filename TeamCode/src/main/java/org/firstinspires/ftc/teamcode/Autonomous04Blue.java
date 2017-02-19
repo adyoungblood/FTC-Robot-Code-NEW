@@ -4,13 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class Autonomous04Red extends LinearOpMode {
+public class Autonomous04Blue extends LinearOpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;

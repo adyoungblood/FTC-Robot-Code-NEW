@@ -1,25 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 
-import java.math.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-@TeleOp(name = "Drive02", group = "Iterative Opmode")
-class Drive02 extends OpMode {
+@TeleOp(name = "Drive02_Sylvana", group = "Iterative Opmode")
+public class Drive02_Sylvana extends OpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
     public DcMotorController motor_controller_shooter;
@@ -46,14 +37,13 @@ class Drive02 extends OpMode {
     public boolean button_y;
     public boolean button_LB;
     public boolean button_RB;
+    public double button_RT;
+    public double button_LT;
 
     double instant;
 
     @Override
     public void init() {
-        telemetry.clear();
-        telemetry.addData("Status", "Initialized");
-        // Initialize drive motors
         motor_controller_shooter = hardwareMap.dcMotorController.get("Motor_Controller_Shooter");
         motor_controller_belt = hardwareMap.dcMotorController.get("Motor_Controller_Belt");
         motor_controller_drive = hardwareMap.dcMotorController.get("Motor_Controller_Drive");
@@ -83,15 +73,18 @@ class Drive02 extends OpMode {
         shooter_motor_1.setDirection(DcMotorSimple.Direction.REVERSE);
         shooter_motor_2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        motor_drive_right.setDirection(DcMotorSimple.Direction.FORWARD);
-        motor_drive_left.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooter_motor_1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter_motor_2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        motor_drive_right.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_drive_left.setDirection(DcMotorSimple.Direction.FORWARD);
 
         motor_drive_right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor_drive_left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         belt_motor.setDirection(DcMotorSimple.Direction.FORWARD);
         intake_motor.setDirection(DcMotorSimple.Direction.FORWARD);
-        shooter_motor_1.setDirection(DcMotor.Direction.REVERSE);
+
         power_motor_drive_right = 0;
         power_motor_drive_left = 0;
         intake_servo.setPosition(0);
@@ -109,33 +102,20 @@ class Drive02 extends OpMode {
 
     @Override
     public void loop() {
-        telemetry.clear();
-        telemetry.addData("Status", "In Loop");
 
-        drive_control();
+//        drive_with_joystick();
+        drive_with_buttons();
         shooter_control();
         intake_control();
         servo_control();
-
-        telemetry.addData("Speed:", speed);
-        telemetry.addData("Start Button:", startButton);
-        telemetry.addData("Start Button Previous", startPrev);
-        telemetry.addData("Left Trigger", power_motor_drive_left);
-        telemetry.addData("Right Trigger", power_motor_drive_right);
     }
 
-    public void drive_control() {
+    public void drive_with_joystick() {
 
-        power_motor_drive_left = gamepad1.left_stick_y;
-        power_motor_drive_right = gamepad1.right_stick_y;
-        startButton = gamepad1.start;
+        motor_drive_left.setPower(gamepad1.left_stick_y);
+        motor_drive_right.setPower(gamepad1.right_stick_y);
 
-        if (startButton && !startPrev) {
-            speed = true;
-        } else {
-            speed = false;
-        }
-
+/*
         if (Math.pow(power_motor_drive_left, 3) > 0) {
             power_motor_drive_left = Math.max(Math.pow(power_motor_drive_left, 3), 0.7);
         } else if (Math.pow(power_motor_drive_left, 3) < 0) {
@@ -164,6 +144,7 @@ class Drive02 extends OpMode {
         motor_drive_right.setPower(power_motor_drive_right);
 
         startPrev = startButton;
+*/
     }
 
     public void intake_control() {
@@ -208,6 +189,33 @@ class Drive02 extends OpMode {
             intake_servo.setPosition(0.05);
         } else {
             intake_servo.setPosition(0);
+        }
+    }
+
+    public void drive_with_buttons() {
+
+        // Define mode in which power is controlled:
+
+        button_RT = gamepad1.right_trigger;
+        button_RB = gamepad1.right_bumper;
+
+        if (button_RT > 0) {
+            motor_drive_right.setPower(button_RT);
+        } else if (button_RB) {
+            motor_drive_right.setPower(-0.5);
+        } else {
+            motor_drive_right.setPower(0);
+        }
+
+        button_LT = gamepad1.left_trigger;
+        button_LB = gamepad1.left_bumper;
+
+        if (button_LT > 0) {
+            motor_drive_left.setPower(button_LT);
+        } else if (button_LB) {
+            motor_drive_left.setPower(-0.5);
+        } else {
+            motor_drive_left.setPower(0);
         }
     }
 
