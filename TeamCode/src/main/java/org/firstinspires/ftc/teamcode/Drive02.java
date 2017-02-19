@@ -194,11 +194,11 @@ class Drive02 extends OpMode {
 
         if (button_y) {
             intake_servo.setPosition(0);
-            shooter_motor_1.setPower(1);
-            shooter_motor_2.setPower(1);
-            waitFor(2000);
+            shooter_motor_1.setPower(0.3);
+            shooter_motor_2.setPower(0.3);
+            waitFor(2);
             belt_motor.setPower(1);
-            waitFor(500);
+            waitFor(0.5);
             intake_servo.setPosition(0.05);
             waitFor(2);
             intake_servo.setPosition(0);
@@ -220,7 +220,7 @@ class Drive02 extends OpMode {
     }
 
 
-    public void waitFor(long seconds) {
+    public void waitFor(double seconds) {
             seconds = seconds * 1000;
 
             instant = runtime.milliseconds();
@@ -228,5 +228,17 @@ class Drive02 extends OpMode {
                 telemetry.addData("Time Left", (seconds - (runtime.milliseconds() - instant)));
             }
     }
+
+
+    /*
+    public void waitFor(double seconds) {
+        try {
+            TimeUnit.MILLISECONDS.sleep((long) (seconds * 1000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+    }
+    */
 
 }

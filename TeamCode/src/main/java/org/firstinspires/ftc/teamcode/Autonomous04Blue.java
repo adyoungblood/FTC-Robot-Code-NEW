@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -7,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+@Autonomous
 public class Autonomous04Blue extends LinearOpMode {
 
     public ElapsedTime runtime = new ElapsedTime();
@@ -56,7 +58,8 @@ public class Autonomous04Blue extends LinearOpMode {
 
         //TODO This is supposed to be the new Autonomous with shooting and cool stuff
         //TODO I need measurements but I should do it now anyway but again I'm lazy xD
-        driveFor(0.5, 1);
+        //driveFor(0.5, 1);
+        shoot();
 
 
     }
@@ -91,11 +94,11 @@ public class Autonomous04Blue extends LinearOpMode {
 
     public void shoot() {
         intake_servo.setPosition(0);
-        shooter_motor_1.setPower(1);
-        shooter_motor_2.setPower(1);
-        waitFor(2000);
+        shooter_motor_1.setPower(0.3);
+        shooter_motor_2.setPower(0.3);
+        waitFor(2);
         belt_motor.setPower(1);
-        waitFor(500);
+        waitFor(0.5);
         intake_servo.setPosition(0.05);
         waitFor(2);
         intake_servo.setPosition(0);
