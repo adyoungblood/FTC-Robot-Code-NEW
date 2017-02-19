@@ -30,12 +30,14 @@ public class Drive02_Sylvana extends OpMode {
     public double power_motor_drive_right;
     public double power_motor_drive_left;
 
-    public boolean button_b;
     public boolean button_y;
     public boolean button_LB;
     public boolean button_RB;
+    public boolean button_LB2;
+    public boolean button_RB2;
     public double button_RT;
     public double button_LT;
+    public boolean shooting;
 
     double instant;
 
@@ -91,6 +93,13 @@ public class Drive02_Sylvana extends OpMode {
         beepID = mySound.load(hardwareMap.appContext, R.raw.startupsoundxp, 1);
         mySound.play(beepID,1,1,1,0,1);
         */
+
+        button_LB = false;
+        button_LB2 = false;
+        button_RB = false;
+        button_RB2 = false;
+        button_y = false;
+        shooting = false;
     }
 
     @Override
@@ -142,12 +151,12 @@ public class Drive02_Sylvana extends OpMode {
 
     public void intake_control() {
 
-        button_RB = gamepad2.right_bumper;
+        button_RB2 = gamepad2.right_bumper;
 
         if (button_RB) {
             intake_motor.setPower(1);
             belt_motor.setPower(0.3);
-        } else {
+        } else if (!shooting) {
             intake_motor.setPower(0);
             belt_motor.setPower(0);
         }
@@ -155,19 +164,21 @@ public class Drive02_Sylvana extends OpMode {
 
     public void shooter_control() {
 
-        button_LB = gamepad2.left_bumper;
+        button_LB2 = gamepad2.left_bumper;
 
         if (button_LB) {
             shooter_motor_1.setPower(0.225);
             shooter_motor_2.setPower(0.225);
-        } else {
+        } else if (!shooting) {
             shooter_motor_1.setPower(0);
             shooter_motor_2.setPower(0);
         }
 
 
         if (button_y) {
+            shooting = true;
             shoot(0.47, 0.3, -0.03);
+            shooting = false;
         }
     }
 
@@ -177,7 +188,7 @@ public class Drive02_Sylvana extends OpMode {
 
         if (button_y) {
             intake_servo.setPosition(0.05);
-        } else {
+        } else if (!shooting) {
             intake_servo.setPosition(0);
         }
     }

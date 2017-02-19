@@ -168,7 +168,7 @@ public class Drive02_Victor extends OpMode {
 
     public void intake_control() {
 
-        right_trigger = gamepad2.left_trigger;
+        right_trigger = gamepad2.right_trigger;
         button_RB = gamepad2.right_bumper;
 
         if (button_RB) {
