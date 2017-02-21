@@ -93,13 +93,6 @@ public class Drive03_Sylvana extends OpMode {
         beepID = mySound.load(hardwareMap.appContext, R.raw.startupsoundxp, 1);
         mySound.play(beepID,1,1,1,0,1);
         */
-
-        button_LB = false;
-        button_LB2 = false;
-        button_RB = false;
-        button_RB2 = false;
-        button_y = false;
-        shooting = false;
     }
 
     @Override
@@ -107,10 +100,11 @@ public class Drive03_Sylvana extends OpMode {
 
 //        drive_with_joystick();
         drive_with_buttons();
-        shooter_control();
-        intake_control();
-        servo_control();
-    }
+        if (gamepad2.y){
+            shooter_control();
+            intake_control();
+            servo_control();        }
+            }
 
     public void drive_with_joystick() {
 
@@ -149,12 +143,9 @@ public class Drive03_Sylvana extends OpMode {
 */
     }
 
-    public void intake_control() {
+    public void intake_control(intake_power, belt_power){
 
-        button_RB2 = gamepad2.right_bumper;
-
-        if (button_RB) {
-            intake_motor.setPower(1);
+            intake_motor.setPower(intake
             belt_motor.setPower(0.3);
         } else if (!shooting) {
             intake_motor.setPower(0);

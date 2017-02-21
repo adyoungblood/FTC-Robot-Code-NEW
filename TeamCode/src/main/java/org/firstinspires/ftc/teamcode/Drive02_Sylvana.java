@@ -31,6 +31,7 @@ public class Drive02_Sylvana extends OpMode {
     public double power_motor_drive_left;
 
     public boolean button_y;
+    public boolean button_x;
     public boolean button_LB;
     public boolean button_RB;
     public boolean button_LB2;
@@ -153,7 +154,7 @@ public class Drive02_Sylvana extends OpMode {
 
         button_RB2 = gamepad2.right_bumper;
 
-        if (button_RB) {
+        if (button_RB2) {
             intake_motor.setPower(1);
             belt_motor.setPower(0.3);
         } else if (!shooting) {
@@ -164,9 +165,10 @@ public class Drive02_Sylvana extends OpMode {
 
     public void shooter_control() {
 
+        button_y = gamepad2.y;
         button_LB2 = gamepad2.left_bumper;
 
-        if (button_LB) {
+        if (button_LB2) {
             shooter_motor_1.setPower(0.225);
             shooter_motor_2.setPower(0.225);
         } else if (!shooting) {
@@ -184,9 +186,9 @@ public class Drive02_Sylvana extends OpMode {
 
     public void servo_control() {
 
-        button_y = gamepad2.y;
+        button_x = gamepad2.x;
 
-        if (button_y) {
+        if (button_x) {
             intake_servo.setPosition(0.05);
         } else if (!shooting) {
             intake_servo.setPosition(0);
